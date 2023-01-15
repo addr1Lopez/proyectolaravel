@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//Route::view('/', 'formRegEmpleado');
+Route::get('/formRegEmpleado', 'App\Http\Controllers\ControllerFormRegEmpleado')->name('formRegEmpleado');
+Route::post('formRegEmpleado', 'App\Http\Controllers\DatosFormRegEmpleado@Validation');
+
+Route::get('/formRegCliente', 'App\Http\Controllers\ControllerFormRegCliente')->name('formRegCliente');
+Route::post('formRegCliente', 'App\Http\Controllers\DatosFormRegCliente@Validation');
