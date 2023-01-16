@@ -27,3 +27,6 @@ Route::post('formRegCliente', 'App\Http\Controllers\DatosFormRegCliente@Validati
 Route::get('/formMantCliente', 'App\Http\Controllers\ControllerFormMantCliente')->name('formMantCliente');
 Route::post('formMantCliente', 'App\Http\Controllers\DatosFormMantCliente@Validation');
 
+Route::get('/formAñadirTarea', 'App\Http\Controllers\ControllerFormAñadirTarea')->name('formAñadirTarea');
+Route::post('formAñadirTarea', 'App\Http\Controllers\DatosFormAñadirTarea@Validation');
+

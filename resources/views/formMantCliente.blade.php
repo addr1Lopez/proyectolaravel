@@ -41,8 +41,6 @@
         <input class="form-check-input" type="radio" name="tipo" value="no"> No
     </div>
 
-    
-
     <div class="col-12">
         <button class="btn btn-primary" type="submit">Enviar</button>
     </div>
