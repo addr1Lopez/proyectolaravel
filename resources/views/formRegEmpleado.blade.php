@@ -4,12 +4,6 @@
 
 @section('contenido')
 
-<style>
-    body {
-        margin: 20px;
-    }
-</style>
-
 <h1> Formulario de registro de empleados: </h1>
 
 <form class="row g-3" method="post" action="{{route('formRegEmpleado')}}">

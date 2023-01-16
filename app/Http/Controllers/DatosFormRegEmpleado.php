@@ -17,5 +17,6 @@ class DatosFormRegEmpleado extends Controller
             'fecha' => 'required',
             'tipo' => 'required',
         ]);
+        return view('formRegEmpleado');
     }
 }

@@ -23,3 +23,7 @@ Route::post('formRegEmpleado', 'App\Http\Controllers\DatosFormRegEmpleado@Valida
 
 Route::get('/formRegCliente', 'App\Http\Controllers\ControllerFormRegCliente')->name('formRegCliente');
 Route::post('formRegCliente', 'App\Http\Controllers\DatosFormRegCliente@Validation');
+
+Route::get('/formMantCliente', 'App\Http\Controllers\ControllerFormMantCliente')->name('formMantCliente');
+Route::post('formMantCliente', 'App\Http\Controllers\DatosFormMantCliente@Validation');
+
