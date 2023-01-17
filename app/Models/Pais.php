@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Pais extends Model
 {
     protected $table = 'paises';
-    //protected $fillable = ['id', 'iso', 'nombre'];
+    protected $fillable = ['id', 'iso', 'nombre'];
 }

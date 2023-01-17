@@ -9,14 +9,19 @@
 <form class="row g-3" method="post" action="{{route('formRegEmpleado')}}">
     @csrf
     <div class="col-md-3">
-        <label for="validationDefault01" class="form-label">DNI:</label>
-        <input type="text" class="form-control" name="dni" placeholder="DNI" id="validationDefault01">
-        {!!$errors->first('dni','<span style="color: red;">:message</span>')!!}
+        <label for="validationDefault01" class="form-label">NIF:</label>
+        <input type="text" class="form-control" name="nif" placeholder="NIF" id="validationDefault01">
+        {!!$errors->first('nif','<span style="color: red;">:message</span>')!!}
     </div>
     <div class="col-md-3">
         <label for="validationDefault02" class="form-label">Nombre:</label>
         <input type="text" class="form-control" name="nombre" placeholder="Nombre" id="validationDefault02">
         {!!$errors->first('nombre','<span style="color: red;">:message</span>')!!}
+    </div>
+    <div class="col-md-3">
+        <label for="validationDefault02" class="form-label">Clave:</label>
+        <input type="text" class="form-control" name="clave" placeholder="Clave" id="validationDefault02">
+        {!!$errors->first('clave','<span style="color: red;">:message</span>')!!}
     </div>
     <div class="col-md-3">
         <label for="validationDefaultUsername" class="form-label">Correo:</label>
@@ -44,9 +49,9 @@
     <div>
         <label for="validationDefault06" class="form-label">Tipo de empleado:</label>
         <br>
-        <input class="form-check-input" type="radio" name="tipo" value="operario"> Operario
+        <input class="form-check-input" type="radio" name="tipo" value="1"> Operario
         <br>
-        <input class="form-check-input" type="radio" name="tipo" value="administrador"> Administrador
+        <input class="form-check-input" type="radio" name="tipo" value="0"> Administrador
     </div>
 
     <div class="col-12">

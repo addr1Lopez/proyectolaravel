@@ -8,15 +8,27 @@
 
     <form class="row g-3" method="post" action="{{ route('formAñadirTarea') }}">
         @csrf
+
         <div class="col-md-3">
-            <label for="nif_cif" class="form-label">NIF / CIF</label>
-            <input type="text" class="form-control" name="nif_cif" placeholder="Concepto">
-            {!! $errors->first('nif_cif', '<span style="color: red;">:message</span>') !!}
+            <label for="cliente" class="form-label">Cliente que encarga el trabajo:</label>
+            <select class="form-select" name="cliente">
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->cif }}" {{ old('cliente') == $cliente->cif ? 'selected' : '' }}>
+                        {{ $cliente->nombre }}
+                    </option>
+                @endforeach
+            </select>
+            {!! $errors->first('operarioEncargado', '<span style=color:red>:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="persona" class="form-label">Persona de contacto:</label>
             <input type="text" class="form-control" name="persona" placeholder="Nombre, Apellidos">
             {!! $errors->first('persona', '<span style="color: red;">:message</span>') !!}
+        </div>
+        <div class="col-md-3">
+            <label for="telefono" class="form-label">Teléfono:</label>
+            <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
+            {!! $errors->first('telefono', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="descripcion" class="form-label">Descripción:</label>
@@ -48,28 +60,48 @@
             {!! $errors->first('codigoPostal', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="provincia" class="form-label">Provincia</label>
-            <input type="text" class="form-control" name="provincia" placeholder="Provincia">
+            <label for="provincia" class="form-label">Provincia:</label>
+            <select class="form-select" name="provincia">
+                @foreach ($provincias as $provincia)
+                    <option value="{{ $provincia->codPoblacion }}" {{ old('provincia') == $provincia->codPoblacion ? 'selected' : '' }}>
+                        {{ $provincia->nombre }}
+                    </option>
+                @endforeach
+            </select>
             {!! $errors->first('provincia', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="operario" class="form-label">Operario</label>
-            <input type="text" class="form-control" name="poblacion" placeholder="Operario">
-            {!! $errors->first('poblacion', '<span style="color: red;">:message</span>') !!}
+            <label for="operario" class="form-label">Operario encargado</label>
+            <select class="form-select" name="operarioEncargado">
+                @foreach ($empleados as $empleado)
+                    @if ($empleado->tipo == 1)
+                        <option value="{{ $empleado->nif }}"
+                            {{ old('operarioEncargado') == $empleado->nif ? 'selected' : '' }}>{{ $empleado->nombre }}
+                        </option>
+                    @endif
+                @endforeach
+            </select>
+            {!! $errors->first('operarioEncargado', '<span style=color:red>:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="estado" class="form-label">Estado</label>
-            <input type="text" class="form-control" name="estado" placeholder="Estado">
+            <label for="estado" class="form-label">Estado:</label>
+            <select class="form-select" name="estado" id="estado">
+                <option value="B">B - Esperando ser aprobada</option>
+                <option value="P">P - Pendiente</option>
+                <option value="R">R - Realizada</option>
+                <option value="C">C - Cancelada</option>
+            </select>
             {!! $errors->first('estado', '<span style="color: red;">:message</span>') !!}
         </div>
 
         <div class="col-md-3">
             <label for="fecha" class="form-label">Fecha de realización:</label>
-            <input type="text" class="form-control" name="fecha" placeholder="Fecha de realización">
+            <input type="date" class="form-control" name="fecha" placeholder="Fecha de realización">
             {!! $errors->first('fecha', '<span style="color: red;">:message</span>') !!}
         </div>
-        
+
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
     </form>
+@endsection

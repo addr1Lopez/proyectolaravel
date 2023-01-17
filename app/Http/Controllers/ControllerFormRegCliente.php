@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pais;
-
 use Illuminate\Http\Request;
+use App\Models\Pais;
 
 class ControllerFormRegCliente extends Controller
 {
