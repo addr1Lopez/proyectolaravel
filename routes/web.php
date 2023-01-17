@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-//Route::view('/', 'formRegEmpleado');
 Route::get('/formRegEmpleado', 'App\Http\Controllers\ControllerFormRegEmpleado')->name('formRegEmpleado');
 Route::post('formRegEmpleado', 'App\Http\Controllers\DatosFormRegEmpleado@Validation');
 
