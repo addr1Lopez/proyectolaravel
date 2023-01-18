@@ -4,7 +4,13 @@
 
 @section('contenido')
 
-    <h1> Añadir una tarea / incidencia: </h1>
+    <h1> Insertar una tarea / incidencia: </h1>
+
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
 
     <form class="row g-3" method="post" action="{{ route('formAñadirTarea') }}">
         @csrf
@@ -22,17 +28,17 @@
         </div>
         <div class="col-md-3">
             <label for="persona" class="form-label">Persona de contacto:</label>
-            <input type="text" class="form-control" name="persona" placeholder="Nombre, Apellidos">
+            <input type="text" class="form-control" name="persona" placeholder="Nombre, Apellidos" value="{{ old('persona') }}">
             {!! $errors->first('persona', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="telefono" class="form-label">Teléfono:</label>
-            <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
+            <input type="text" class="form-control" name="telefono" placeholder="Teléfono" value="{{ old('telefono') }}">
             {!! $errors->first('telefono', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="descripcion" class="form-label">Descripción:</label>
-            <input type="text" class="form-control" name="descripcion" placeholder="Descripción">
+            <input type="text" class="form-control" name="descripcion" placeholder="Descripción" value="{{ old('descripcion') }}">
             {!! $errors->first('descripcion', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
@@ -40,30 +46,31 @@
             <div class="input-group">
                 <span class="input-group-text" id="inputGroupPrepend2">@</span>
                 <input type="text" class="form-control" name="correo" placeholder="Correo"
-                    aria-describedby="inputGroupPrepend2">
+                    aria-describedby="inputGroupPrepend2" value="{{ old('correo') }}">
             </div>
             {!! $errors->first('correo', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="direccion" class="form-label">Dirección:</label>
-            <input type="text" class="form-control" name="direccion" placeholder="Dirección">
+            <input type="text" class="form-control" name="direccion" placeholder="Dirección" value="{{ old('direccion') }}">
             {!! $errors->first('direccion', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="poblacion" class="form-label">Población:</label>
-            <input type="text" class="form-control" name="poblacion" placeholder="Población">
+            <input type="text" class="form-control" name="poblacion" placeholder="Población" value="{{ old('poblacion') }}">
             {!! $errors->first('poblacion', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="codigoPostal" class="form-label">Código postal:</label>
-            <input type="text" class="form-control" name="codigoPostal" placeholder="Código postal">
+            <input type="text" class="form-control" name="codigoPostal" placeholder="Código postal" value="{{ old('codigoPostal') }}">
             {!! $errors->first('codigoPostal', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="provincia" class="form-label">Provincia:</label>
             <select class="form-select" name="provincia">
                 @foreach ($provincias as $provincia)
-                    <option value="{{ $provincia->codPoblacion }}" {{ old('provincia') == $provincia->codPoblacion ? 'selected' : '' }}>
+                    <option value="{{ $provincia->codPoblacion }}"
+                        {{ old('provincia') == $provincia->codPoblacion ? 'selected' : '' }}>
                         {{ $provincia->nombre }}
                     </option>
                 @endforeach
@@ -95,9 +102,9 @@
         </div>
 
         <div class="col-md-3">
-            <label for="fecha" class="form-label">Fecha de realización:</label>
-            <input type="date" class="form-control" name="fecha" placeholder="Fecha de realización">
-            {!! $errors->first('fecha', '<span style="color: red;">:message</span>') !!}
+            <label for="fechaRealizacion" class="form-label">Fecha de realización:</label>
+            <input type="date" class="form-control" name="fechaRealizacion" placeholder="Fecha de realización" value="{{ old('fechaRealizacion') }}">
+            {!! $errors->first('fechaRealizacion', '<span style="color: red;">La fecha de realización tiene que ser posterior al día de hoy.</span>') !!}
         </div>
 
         <div class="col-12">

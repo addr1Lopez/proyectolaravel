@@ -29,3 +29,7 @@ Route::post('formMantCliente', 'App\Http\Controllers\DatosFormMantCliente@Valida
 Route::get('/formAñadirTarea', 'App\Http\Controllers\ControllerFormAñadirTarea')->name('formAñadirTarea');
 Route::post('formAñadirTarea', 'App\Http\Controllers\DatosFormAñadirTarea@Validation');
 
+Route::get('/listarTareas', 'App\Http\Controllers\ControllerFormAñadirTarea@listar')->name('listarTareas');
+
+Route::get('/confirmBorrarTarea', 'App\Http\Controllers\ControllerFormAñadirTarea@confirmacionBorrar')->name('confirmBorrarTarea');
+Route::get('/borrarTarea', 'App\Http\Controllers\ControllerFormAñadirTarea@borrarTarea')->name('borrarTarea');

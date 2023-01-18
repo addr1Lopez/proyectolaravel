@@ -15,7 +15,7 @@ class DatosFormRegCliente extends Controller
             'nombre' => 'required',
             'correo' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
-            'cuenta' => 'required',
+            'cuenta' => 'required|regex:/^ES\d{2}\d{4}\d{4}\d{2}\d{10}$/',
             'importe' => 'required',
             'pais' => 'required',
             'moneda' => 'required',

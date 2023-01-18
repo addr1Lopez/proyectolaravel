@@ -16,12 +16,12 @@
         @csrf
         <div class="col-md-3">
             <label for="validationDefault01" class="form-label">CIF:</label>
-            <input type="text" class="form-control" name="cif" placeholder="CIF">
+            <input type="text" class="form-control" name="cif" placeholder="CIF" value="{{ old('cif') }}">
             {!! $errors->first('cif', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="validationDefault02" class="form-label">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+            <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="{{ old('nombre') }}">
             {!! $errors->first('nombre', '<span style="color: red;">:message</span>') !!}
         </div>
 
@@ -30,26 +30,26 @@
             <div class="input-group">
                 <span class="input-group-text" id="inputGroupPrepend2">@</span>
                 <input type="text" class="form-control" name="correo" placeholder="Correo"
-                    aria-describedby="inputGroupPrepend2">
+                    aria-describedby="inputGroupPrepend2" value="{{ old('correo') }}">
             </div>
             {!! $errors->first('correo', '<span style="color: red;">:message</span>') !!}
         </div>
 
         <div class="col-md-3">
             <label for="validationDefault03" class="form-label">Teléfono:</label>
-            <input type="text" class="form-control" name="telefono" placeholder="Teléfono">
+            <input type="text" class="form-control" name="telefono" placeholder="Teléfono" value="{{ old('telefono') }}">
             {!! $errors->first('telefono', '<span style="color: red;">:message</span>') !!}
         </div>
 
         <div class="col-md-3">
             <label for="validationDefault04" class="form-label">Cuenta corriente:</label>
-            <input type="text" class="form-control" name="cuenta" placeholder="Cuenta corriente">
+            <input type="text" class="form-control" name="cuenta" placeholder="Cuenta corriente" value="{{ old('cuenta') }}">
             {!! $errors->first('cuenta', '<span style="color: red;">:message</span>') !!}
         </div>
 
         <div class="col-md-3">
             <label for="validationDefault07" class="form-label">Importe cuota mensual:</label>
-            <input type="text" class="form-control" name="importe" placeholder="Importe cuota mensual">
+            <input type="text" class="form-control" name="importe" placeholder="Importe cuota mensual" value="{{ old('importe') }}">
             {!! $errors->first('cuota', '<span style="color: red;">:message</span>') !!}
         </div>
 

@@ -11,5 +11,5 @@ class Tarea extends Model
     public $timestamps = false;
     protected $fillable = [
         'id', 'cliente', 'persona', 'telefono', 'descripcion', 'correo', 'direccion', 'poblacion',
-        'codigoPostal', 'provincia', 'operarioEncargado', 'estado', 'fecha'];
+        'codigoPostal', 'provincia', 'operarioEncargado', 'estado', 'fechaCreacion', 'fechaRealizacion'];
 }
