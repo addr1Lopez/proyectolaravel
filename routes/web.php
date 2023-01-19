@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ControllerTarea;
+use App\Http\Controllers\ControllerEmpleado;
+use App\Http\Controllers\ControllerMantenimiento;
+use App\Http\Controllers\ControllerCliente;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,19 +21,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/formRegEmpleado', 'App\Http\Controllers\ControllerFormRegEmpleado')->name('formRegEmpleado');
-Route::post('formRegEmpleado', 'App\Http\Controllers\DatosFormRegEmpleado@Validation');
+//Route::get('/formularioEmpleado', 'App\Http\Controllers\ControllerEmpleado')->name('formularioEmpleado'); 
+Route::get('/formularioEmpleado', ControllerEmpleado::class)->name('formularioEmpleado');
+Route::post('formularioEmpleado',  [ControllerEmpleado::class, 'validacionInsertar']);
 
-Route::get('/formRegCliente', 'App\Http\Controllers\ControllerFormRegCliente')->name('formRegCliente');
-Route::post('formRegCliente', 'App\Http\Controllers\DatosFormRegCliente@Validation');
+Route::get('/formularioCliente', ControllerCliente::class)->name('formularioCliente');
+Route::post('formularioCliente', [ControllerCliente::class, 'validacionInsertar']);
 
-Route::get('/formMantCliente', 'App\Http\Controllers\ControllerFormMantCliente')->name('formMantCliente');
-Route::post('formMantCliente', 'App\Http\Controllers\DatosFormMantCliente@Validation');
+Route::get('/formMantenimiento', ControllerMantenimiento::class)->name('formMantenimiento');
+Route::post('formMantenimiento', [ControllerMantenimiento::class, 'validacionInsertar']);
 
-Route::get('/formAñadirTarea', 'App\Http\Controllers\ControllerFormAñadirTarea')->name('formAñadirTarea');
-Route::post('formAñadirTarea', 'App\Http\Controllers\DatosFormAñadirTarea@Validation');
+//Route::get('/formularioTarea/{id}', ControllerTarea::class)->name('formularioTarea');
+Route::get('/formularioTarea', ControllerTarea::class)->name('formularioTarea');
+Route::post('formularioTarea', [ControllerTarea::class, 'validacionInsertar']);
 
-Route::get('/listarTareas', 'App\Http\Controllers\ControllerFormAñadirTarea@listar')->name('listarTareas');
+Route::get('/listaTareas', [ControllerTarea::class, 'listar'])->name('listaTareas');
 
-Route::get('/confirmBorrarTarea', 'App\Http\Controllers\ControllerFormAñadirTarea@confirmacionBorrar')->name('confirmBorrarTarea');
-Route::get('/borrarTarea', 'App\Http\Controllers\ControllerFormAñadirTarea@borrarTarea')->name('borrarTarea');
+Route::get('/confirmBorrarTarea', [ControllerTarea::class, 'confirmacionBorrar'])->name('confirmBorrarTarea');
+Route::get('/borrarTarea', [ControllerTarea::class, 'borrarTarea'])->name('borrarTarea');

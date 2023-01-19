@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Empleado;
 use App\Rules\DniRule;
 
-class DatosFormRegEmpleado extends Controller
+class ControllerEmpleado extends Controller
 {
-    public function Validation()
+    public function __invoke(Request $request)
+    {
+        return view('formularioEmpleado');
+    }
+
+    public function validacionInsertar()
     {
         $datos = request()->validate([
             'nif' => ['required', new DniRule],
@@ -25,7 +30,7 @@ class DatosFormRegEmpleado extends Controller
         session()->flash('message', 'El empleado ha sido registrado correctamente.');
 
         //return request();
-        return redirect()->route('formRegEmpleado');
+        return redirect()->route('formularioEmpleado');
         //return view('formAñadirTarea');
     }
 }

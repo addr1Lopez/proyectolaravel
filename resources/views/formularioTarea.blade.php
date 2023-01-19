@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <form class="row g-3" method="post" action="{{ route('formAñadirTarea') }}">
+    <form class="row g-3" method="post" action="{{ route('formularioTarea') }}">
         @csrf
 
         <div class="col-md-3">

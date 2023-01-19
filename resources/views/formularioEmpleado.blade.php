@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <form class="row g-3" method="post" action="{{ route('formRegEmpleado') }}">
+    <form class="row g-3" method="post" action="{{ route('formularioEmpleado') }}">
         @csrf
         <div class="col-md-3">
             <label for="validationDefault01" class="form-label">NIF:</label>

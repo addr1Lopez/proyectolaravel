@@ -6,7 +6,7 @@
 
     <h1> Formulario de mantenimiento: </h1>
 
-    <form class="row g-3" method="post" action="{{ route('formMantCliente') }}">
+    <form class="row g-3" method="post" action="{{ route('formMantenimiento') }}">
         @csrf
         <div class="col-md-3">
             <label for="validationDefault01" class="form-label">Concepto</label>

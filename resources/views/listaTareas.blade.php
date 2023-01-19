@@ -25,7 +25,7 @@
 
     <h1>Listado de tareas</h1>
     <div id="cuerpo">
-            <table class="table">
+            <table class="table table-striped table-hover">
                 <thead class="table-warning">
                     <tr>
                         <th scope="col">ID</th>

@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pais;
 use App\Models\Cliente;
 use App\Rules\CifRules;
 
-class DatosFormRegCliente extends Controller
+class ControllerCliente extends Controller
 {
-    public function Validation()
+    public function __invoke(Request $request)
+    {
+        $paises = Pais::all();
+        return view('formularioCliente', compact('paises'));
+    }
+
+    public function validacionInsertar()
     {
         $datos = request()->validate([
             'cif' => ['required', new CifRules],
@@ -24,7 +31,7 @@ class DatosFormRegCliente extends Controller
         Cliente::create($datos);
         session()->flash('message', 'El cliente ha sido registrado correctamente.');
 
-        return redirect()->route('formRegCliente');
+        return redirect()->route('formularioCliente');
        
     }
 }

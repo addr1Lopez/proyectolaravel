@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DatosFormMantCliente extends Controller
+class ControllerMantenimiento extends Controller
 {
-    public function Validation()
+    public function __invoke(Request $request)
+    {
+        return view('formMantenimiento');
+    }
+
+    public function validacionInsertar()
     {
         request()->validate([
             'concepto' => 'required',
@@ -16,6 +21,6 @@ class DatosFormMantCliente extends Controller
             'notas' => 'required',
             'pagada' => 'required',
         ]);
-        return view('formMantCliente');
+        return view('formMantenimiento');
     }
 }

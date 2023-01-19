@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Empleado;
+use App\Models\Cliente;
+use App\Models\Provincia;
+use App\Models\Tarea;
+
+
+class ControllerTarea extends Controller
+{
+    public function __invoke(Request $request)
+    {
+        $clientes = Cliente::all();
+        $empleados = Empleado::all();
+        $provincias = Provincia::all();
+        return view('formularioTarea', compact('empleados', 'clientes', 'provincias'));
+    }
+
+    public function listar()
+    {
+        $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(3);
+        return view('listaTareas', compact('tareas'));
+    }
+
+    public function confirmacionBorrar(Request $request)
+    {
+        $tarea = Tarea::find($request->id);
+        return view('confirmBorrarTarea')->with('tarea', $tarea);
+    }
+
+
+    public function borrarTarea(Request $request)
+    {
+        Tarea::find($request->id)->delete();
+        //$tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(3);
+        session()->flash('message', 'La tarea se ha borrado exitosamente');
+        return redirect()->route('listaTareas');
+    }
+
+    public function validacionInsertar()
+    {
+        $datos = request()->validate([
+            'cliente' => 'required',
+            'persona' => 'required',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+            'descripcion' => 'required',
+            'correo' => 'required|email',
+            'direccion' => 'required',
+            'poblacion' => 'required',
+            'codigoPostal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
+            'provincia' => 'required',
+            'operarioEncargado' => 'required',
+            'estado' => 'required',
+            'fechaRealizacion' => 'required|after:now',
+        ]);
+        $datos['fechaCreacion'] = (new \DateTime())->format('Y-m-d');
+        Tarea::create($datos);
+        session()->flash('message', 'La tarea / incidencia se ha registrado correctamente.');
+
+
+        return redirect()->route('formularioTarea');
+    }
+}

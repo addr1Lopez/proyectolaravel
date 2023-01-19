@@ -49,6 +49,6 @@
     </div>
 
     <a class="btn btn-danger" href="{{ route('borrarTarea', ['id' => $tarea->id]) }}">Borrar</a>
-    <a class="btn btn-success" href="listarTareas">Cancelar</a>
+    <a class="btn btn-success" href="listaTareas">Cancelar</a>
 
 @endsection

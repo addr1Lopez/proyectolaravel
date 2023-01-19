@@ -27,19 +27,19 @@
             <div class="navbar-collapse collapse show" id="navbarColor02" style="">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="formRegCliente">Registrar un cliente</a>
+                        <a class="nav-link" href="formularioCliente">Registrar un cliente</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formRegEmpleado">Registrar un empleado</a>
+                        <a class="nav-link" href="formularioEmpleado">Registrar un empleado</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formMantCliente">Formulario de mantenimiento</a>
+                        <a class="nav-link" href="formMantenimiento">Formulario de mantenimiento</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="formAñadirTarea">Añadir una tarea / incidencia</a>
+                        <a class="nav-link" href="formularioTarea">Insertar una tarea / incidencia</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="listarTareas">Listado de tareas</a>
+                        <a class="nav-link" href="listaTareas">Listado de tareas</a>
                     </li>
                 </ul>
             </div>
