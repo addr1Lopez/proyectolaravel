@@ -21,24 +21,43 @@ class ControllerTarea extends Controller
 
     public function listar()
     {
-        $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(3);
+        $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(5);
         return view('listaTareas', compact('tareas'));
     }
 
-    public function confirmacionBorrar(Request $request)
+    public function verDetalles(Tarea $tarea)
     {
-        $tarea = Tarea::find($request->id);
-        return view('confirmBorrarTarea')->with('tarea', $tarea);
+        return view('verDetalles', compact('tarea'));
     }
 
 
-    public function borrarTarea(Request $request)
+    // public function confirmacionBorrar(Request $request)
+    // {
+    //     $tarea = Tarea::find($request->id);
+    //     return view('confirmBorrarTarea')->with('tarea', $tarea);
+    // }
+
+
+    // public function borrarTarea(Request $request)
+    // {
+    //     Tarea::find($request->id)->delete();
+    //     //$tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(3);
+    //     session()->flash('message', 'La tarea se ha borrado exitosamente');
+    //     return redirect()->route('listaTareas');
+    // }
+
+    public function confirmacionBorrar(Tarea $tarea)
     {
-        Tarea::find($request->id)->delete();
-        //$tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(3);
+        return view('confirmBorrarTarea', compact('tarea'));
+    }
+
+    public function borrarTarea(Tarea $tarea)
+    {
+        $tarea->delete();
         session()->flash('message', 'La tarea se ha borrado exitosamente');
         return redirect()->route('listaTareas');
     }
+
 
     public function validacionInsertar()
     {

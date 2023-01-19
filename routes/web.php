@@ -36,6 +36,10 @@ Route::get('/formularioTarea', ControllerTarea::class)->name('formularioTarea');
 Route::post('formularioTarea', [ControllerTarea::class, 'validacionInsertar']);
 
 Route::get('/listaTareas', [ControllerTarea::class, 'listar'])->name('listaTareas');
+Route::get('/verDetalles/{tarea}', [ControllerTarea::class, 'verDetalles'])->name('verDetalles');
 
-Route::get('/confirmBorrarTarea', [ControllerTarea::class, 'confirmacionBorrar'])->name('confirmBorrarTarea');
-Route::get('/borrarTarea', [ControllerTarea::class, 'borrarTarea'])->name('borrarTarea');
+
+//Route::get('/confirmBorrarTarea', [ControllerTarea::class, 'confirmacionBorrar'])->name('confirmBorrarTarea');
+//Route::get('/borrarTarea', [ControllerTarea::class, 'borrarTarea'])->name('borrarTarea');
+Route::get('/confirmBorrarTarea/{tarea}', [ControllerTarea::class, 'confirmacionBorrar'])->name('confirmBorrarTarea');
+Route::delete('/borrarTarea/{tarea}', [ControllerTarea::class, 'borrarTarea'])->name('borrarTarea');

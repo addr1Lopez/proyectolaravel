@@ -4,31 +4,31 @@
 
 @section('contenido')
 
-<h1> ¿Estás seguro de que quieres borrar la tarea {{ $tarea->id }}? </h1>
+    <h1> ¿Estás seguro de que quieres borrar la tarea {{ $tarea->id }}? </h1>
 
-<br>
+    <br>
 
-<div id="cuerpo">
-    <div class="table-responsive">
-        <table class="table">
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Persona</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Población</th>
-                    <th scope="col">Codigo postal</th>
-                    <th scope="col">Provincia</th>
-                    <th scope="col">Operario Encargado</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Fecha de realización</th>
-                </tr>
-            </thead>
-            <tbody>
+    <div id="cuerpo">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Persona</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Población</th>
+                        <th scope="col">Codigo postal</th>
+                        <th scope="col">Provincia</th>
+                        <th scope="col">Operario Encargado</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha de realización</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <tr>
                         <td>{{ $tarea->id }}</td>
                         <td>{{ $tarea->cliente }}</td>
@@ -44,11 +44,19 @@
                         <td>{{ $tarea->estado }}</td>
                         <td>{{ $tarea->fechaRealizacion }}</td>
                     </tr>
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
 
-    <a class="btn btn-danger" href="{{ route('borrarTarea', ['id' => $tarea->id]) }}">Borrar</a>
-    <a class="btn btn-success" href="listaTareas">Cancelar</a>
+        <div>
+            <form action="{{ route('borrarTarea', $tarea) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">🗑️ Borrar</button>
+                <a class="btn btn-info" href="{{ route('listaTareas') }}">🡰 Volver atrás</a>
+            </form>
+        </div>
 
-@endsection
+
+
+    @endsection
