@@ -33,4 +33,22 @@ class ControllerEmpleado extends Controller
         return redirect()->route('formularioEmpleado');
         //return view('formAñadirTarea');
     }
+
+    public function listar()
+    {
+        $empleados = Empleado::orderBy('fechaAlta', 'desc')->paginate(2);
+        return view('listaEmpleados', compact('empleados'));
+    }
+
+    public function confirmacionBorrar(Empleado $empleado)
+    {
+        return view('confirmBorrarEmpleado', compact('empleado'));
+    }
+
+    public function borrarEmpleado(Empleado $empleado)
+    {
+        $empleado->delete();
+        session()->flash('message', 'El empleado se ha borrado exitosamente');
+        return redirect()->route('listaEmpleados');
+    }
 }

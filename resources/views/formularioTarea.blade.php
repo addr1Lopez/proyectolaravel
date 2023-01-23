@@ -4,7 +4,11 @@
 
 @section('contenido')
 
-    <h1> Insertar una tarea / incidencia: </h1>
+    <style>
+        #formulario {
+            margin: 20px;
+        }
+    </style>
 
     @if (session()->has('message'))
         <div class="alert alert-success">
@@ -12,8 +16,9 @@
         </div>
     @endif
 
-    <form class="row g-3" method="post" action="{{ route('formularioTarea') }}">
+    <form id="formulario" class="row g-3" method="post" action="{{ route('formularioTarea') }}">
         @csrf
+        <h1> Añadir una tarea / incidencia: </h1>
 
         <div class="col-md-3">
             <label for="cliente" class="form-label">Cliente que encarga el trabajo:</label>
@@ -28,7 +33,8 @@
         </div>
         <div class="col-md-3">
             <label for="persona" class="form-label">Persona de contacto:</label>
-            <input type="text" class="form-control" name="persona" placeholder="Nombre, Apellidos" value="{{ old('persona') }}">
+            <input type="text" class="form-control" name="persona" placeholder="Nombre, Apellidos"
+                value="{{ old('persona') }}">
             {!! $errors->first('persona', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
@@ -38,7 +44,8 @@
         </div>
         <div class="col-md-3">
             <label for="descripcion" class="form-label">Descripción:</label>
-            <input type="text" class="form-control" name="descripcion" placeholder="Descripción" value="{{ old('descripcion') }}">
+            <input type="text" class="form-control" name="descripcion" placeholder="Descripción"
+                value="{{ old('descripcion') }}">
             {!! $errors->first('descripcion', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
@@ -52,17 +59,20 @@
         </div>
         <div class="col-md-3">
             <label for="direccion" class="form-label">Dirección:</label>
-            <input type="text" class="form-control" name="direccion" placeholder="Dirección" value="{{ old('direccion') }}">
+            <input type="text" class="form-control" name="direccion" placeholder="Dirección"
+                value="{{ old('direccion') }}">
             {!! $errors->first('direccion', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="poblacion" class="form-label">Población:</label>
-            <input type="text" class="form-control" name="poblacion" placeholder="Población" value="{{ old('poblacion') }}">
+            <input type="text" class="form-control" name="poblacion" placeholder="Población"
+                value="{{ old('poblacion') }}">
             {!! $errors->first('poblacion', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="codigoPostal" class="form-label">Código postal:</label>
-            <input type="text" class="form-control" name="codigoPostal" placeholder="Código postal" value="{{ old('codigoPostal') }}">
+            <input type="text" class="form-control" name="codigoPostal" placeholder="Código postal"
+                value="{{ old('codigoPostal') }}">
             {!! $errors->first('codigoPostal', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
@@ -103,8 +113,12 @@
 
         <div class="col-md-3">
             <label for="fechaRealizacion" class="form-label">Fecha de realización:</label>
-            <input type="date" class="form-control" name="fechaRealizacion" placeholder="Fecha de realización" value="{{ old('fechaRealizacion') }}">
-            {!! $errors->first('fechaRealizacion', '<span style="color: red;">La fecha de realización tiene que ser posterior al día de hoy.</span>') !!}
+            <input type="date" class="form-control" name="fechaRealizacion" placeholder="Fecha de realización"
+                value="{{ old('fechaRealizacion') }}">
+            {!! $errors->first(
+                'fechaRealizacion',
+                '<span style="color: red;">La fecha de realización tiene que ser posterior al día de hoy.</span>',
+            ) !!}
         </div>
 
         <div class="col-12">

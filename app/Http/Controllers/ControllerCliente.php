@@ -34,4 +34,22 @@ class ControllerCliente extends Controller
         return redirect()->route('formularioCliente');
        
     }
+    
+    public function listar()
+    {
+        $clientes = Cliente::orderBy('nombre', 'asc')->paginate(4);
+        return view('listaClientes', compact('clientes'));
+    }
+
+    public function confirmacionBorrar(Cliente $cliente)
+    {
+        return view('confirmBorrarCliente', compact('cliente'));
+    }
+
+    public function borrarCliente(Cliente $cliente)
+    {
+        $cliente->delete();
+        session()->flash('message', 'El cliente se ha borrado exitosamente');
+        return redirect()->route('listaClientes');
+    }
 }

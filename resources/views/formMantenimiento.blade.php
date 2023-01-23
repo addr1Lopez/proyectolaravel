@@ -4,10 +4,26 @@
 
 @section('contenido')
 
-    <h1> Formulario de mantenimiento: </h1>
+    <style>
+        #formulario {
+            margin: 20px;
+        }
+    </style>
 
-    <form class="row g-3" method="post" action="{{ route('formMantenimiento') }}">
+    <form id="formulario" class="row g-3" method="post" action="{{ route('formMantenimiento') }}">
         @csrf
+        <h1> Formulario de mantenimiento: </h1>
+        <div class="col-md-3">
+            <label for="tarea" class="form-label">Tarea:</label>
+            <select class="form-select" name="cliente">
+                @foreach ($tareas as $tarea)
+                    <option value="{{ $tarea->id }}" {{ old('tarea') == $tarea->id ? 'selected' : '' }}>
+                        {{ $tarea->id }}
+                    </option>
+                @endforeach
+            </select>
+            {!! $errors->first('operarioEncargado', '<span style=color:red>:message</span>') !!}
+        </div>
         <div class="col-md-3">
             <label for="validationDefault01" class="form-label">Concepto</label>
             <input type="text" class="form-control" name="concepto" placeholder="Concepto" value="{{ old('concepto') }}">
@@ -15,7 +31,8 @@
         </div>
         <div class="col-md-3">
             <label for="validationDefault02" class="form-label">Fecha de emisión:</label>
-            <input type="text" class="form-control" name="fechaEmision" placeholder="Fecha de emisión" value="{{ old('fechaEmision') }}">
+            <input type="date" class="form-control" name="fechaEmision" placeholder="Fecha de emisión"
+                value="{{ old('fechaEmision') }}">
             {!! $errors->first('fechaEmision', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
@@ -36,9 +53,11 @@
         <div>
             <label for="validationDefault08" class="form-label">Pagada:</label>
             <br>
-            <input class="form-check-input" type="radio" name="pagada" value="si" {{ old('pagada') == 'si' ? 'checked' : '' }}> Sí
+            <input class="form-check-input" type="radio" name="pagada" value="si"
+                {{ old('pagada') == 'si' ? 'checked' : '' }}> Sí
             <br>
-            <input class="form-check-input" type="radio" name="pagada" value="no" {{ old('pagada') == 'no' ? 'checked' : '' }}> No
+            <input class="form-check-input" type="radio" name="pagada" value="no"
+                {{ old('pagada') == 'no' ? 'checked' : '' }}> No
         </div>
 
         <div class="col-12">

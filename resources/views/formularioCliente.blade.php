@@ -4,7 +4,11 @@
 
 @section('contenido')
 
-    <h1> Formulario de registro de cliente: </h1>
+    <style>
+        #formulario {
+            margin: 20px;
+        }
+    </style>
 
     @if (session()->has('message'))
         <div class="alert alert-success">
@@ -12,8 +16,9 @@
         </div>
     @endif
 
-    <form class="row g-3" method="post" action="{{ route('formularioCliente') }}">
+    <form id="formulario" class="row g-3" method="post" action="{{ route('formularioCliente') }}">
         @csrf
+        <h1> Formulario de registro de cliente: </h1>
         <div class="col-md-3">
             <label for="validationDefault01" class="form-label">CIF:</label>
             <input type="text" class="form-control" name="cif" placeholder="CIF" value="{{ old('cif') }}">
@@ -43,13 +48,15 @@
 
         <div class="col-md-3">
             <label for="validationDefault04" class="form-label">Cuenta corriente:</label>
-            <input type="text" class="form-control" name="cuenta" placeholder="Cuenta corriente" value="{{ old('cuenta') }}">
+            <input type="text" class="form-control" name="cuenta" placeholder="Cuenta corriente"
+                value="{{ old('cuenta') }}">
             {!! $errors->first('cuenta', '<span style="color: red;">:message</span>') !!}
         </div>
 
         <div class="col-md-3">
             <label for="validationDefault07" class="form-label">Importe cuota mensual:</label>
-            <input type="text" class="form-control" name="importe" placeholder="Importe cuota mensual" value="{{ old('importe') }}">
+            <input type="text" class="form-control" name="importe" placeholder="Importe cuota mensual"
+                value="{{ old('importe') }}">
             {!! $errors->first('cuota', '<span style="color: red;">:message</span>') !!}
         </div>
 

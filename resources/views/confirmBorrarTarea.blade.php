@@ -1,4 +1,4 @@
-@section('titulo', 'Formulario de registro de cliente')
+@section('titulo', 'Confirmación de borrado de la tarea')
 
 @extends('template')
 
@@ -56,7 +56,7 @@
                 <a class="btn btn-info" href="{{ route('listaTareas') }}">🡰 Volver atrás</a>
             </form>
         </div>
+    </div>
 
 
-
-    @endsection
+@endsection

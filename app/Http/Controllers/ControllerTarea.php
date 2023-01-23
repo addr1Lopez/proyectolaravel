@@ -21,7 +21,7 @@ class ControllerTarea extends Controller
 
     public function listar()
     {
-        $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(5);
+        $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(7);
         return view('listaTareas', compact('tareas'));
     }
 
@@ -30,21 +30,6 @@ class ControllerTarea extends Controller
         return view('verDetalles', compact('tarea'));
     }
 
-
-    // public function confirmacionBorrar(Request $request)
-    // {
-    //     $tarea = Tarea::find($request->id);
-    //     return view('confirmBorrarTarea')->with('tarea', $tarea);
-    // }
-
-
-    // public function borrarTarea(Request $request)
-    // {
-    //     Tarea::find($request->id)->delete();
-    //     //$tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(3);
-    //     session()->flash('message', 'La tarea se ha borrado exitosamente');
-    //     return redirect()->route('listaTareas');
-    // }
 
     public function confirmacionBorrar(Tarea $tarea)
     {
@@ -57,7 +42,6 @@ class ControllerTarea extends Controller
         session()->flash('message', 'La tarea se ha borrado exitosamente');
         return redirect()->route('listaTareas');
     }
-
 
     public function validacionInsertar()
     {

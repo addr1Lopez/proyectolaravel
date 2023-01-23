@@ -25,8 +25,16 @@ use App\Http\Controllers\ControllerCliente;
 Route::get('/formularioEmpleado', ControllerEmpleado::class)->name('formularioEmpleado');
 Route::post('formularioEmpleado',  [ControllerEmpleado::class, 'validacionInsertar']);
 
+Route::get('/listaEmpleados', [ControllerEmpleado::class, 'listar'])->name('listaEmpleados');
+Route::get('/confirmBorrarEmpleado/{empleado}', [ControllerEmpleado::class, 'confirmacionBorrar'])->name('confirmBorrarEmpleado');
+Route::delete('/borrarEmpleado/{empleado}', [ControllerEmpleado::class, 'borrarEmpleado'])->name('borrarEmpleado');
+
 Route::get('/formularioCliente', ControllerCliente::class)->name('formularioCliente');
 Route::post('formularioCliente', [ControllerCliente::class, 'validacionInsertar']);
+
+Route::get('/listaClientes', [ControllerCliente::class, 'listar'])->name('listaClientes');
+Route::get('/confirmBorrarCliente/{cliente}', [ControllerCliente::class, 'confirmacionBorrar'])->name('confirmBorrarCliente');
+Route::delete('/borrarCliente/{cliente}', [ControllerCliente::class, 'borrarCliente'])->name('borrarCliente');
 
 Route::get('/formMantenimiento', ControllerMantenimiento::class)->name('formMantenimiento');
 Route::post('formMantenimiento', [ControllerMantenimiento::class, 'validacionInsertar']);
@@ -38,8 +46,5 @@ Route::post('formularioTarea', [ControllerTarea::class, 'validacionInsertar']);
 Route::get('/listaTareas', [ControllerTarea::class, 'listar'])->name('listaTareas');
 Route::get('/verDetalles/{tarea}', [ControllerTarea::class, 'verDetalles'])->name('verDetalles');
 
-
-//Route::get('/confirmBorrarTarea', [ControllerTarea::class, 'confirmacionBorrar'])->name('confirmBorrarTarea');
-//Route::get('/borrarTarea', [ControllerTarea::class, 'borrarTarea'])->name('borrarTarea');
 Route::get('/confirmBorrarTarea/{tarea}', [ControllerTarea::class, 'confirmacionBorrar'])->name('confirmBorrarTarea');
 Route::delete('/borrarTarea/{tarea}', [ControllerTarea::class, 'borrarTarea'])->name('borrarTarea');
