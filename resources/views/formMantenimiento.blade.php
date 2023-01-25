@@ -4,59 +4,53 @@
 
 @section('contenido')
 
-    <style>
-        #formulario {
-            margin: 20px;
-        }
-    </style>
-
     <form id="formulario" class="row g-3" method="post" action="{{ route('formMantenimiento') }}">
         @csrf
         <h1> Formulario de mantenimiento: </h1>
         <div class="col-md-3">
             <label for="tarea" class="form-label">Tarea:</label>
-            <select class="form-select" name="cliente">
+            <select class="form-select" name="tarea">
                 @foreach ($tareas as $tarea)
                     <option value="{{ $tarea->id }}" {{ old('tarea') == $tarea->id ? 'selected' : '' }}>
                         {{ $tarea->id }}
                     </option>
                 @endforeach
             </select>
-            {!! $errors->first('operarioEncargado', '<span style=color:red>:message</span>') !!}
+            {!! $errors->first('tarea', '<span style=color:red>:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="validationDefault01" class="form-label">Concepto</label>
+            <label for="concepto" class="form-label">Concepto</label>
             <input type="text" class="form-control" name="concepto" placeholder="Concepto" value="{{ old('concepto') }}">
             {!! $errors->first('concepto', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="validationDefault02" class="form-label">Fecha de emisión:</label>
+            <label for="fechaEmision" class="form-label">Fecha de emisión:</label>
             <input type="date" class="form-control" name="fechaEmision" placeholder="Fecha de emisión"
                 value="{{ old('fechaEmision') }}">
             {!! $errors->first('fechaEmision', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="validationDefault03" class="form-label">Importe:</label>
+            <label for="importe" class="form-label">Importe:</label>
             <input type="text" class="form-control" name="importe" placeholder="Importe" value="{{ old('importe') }}">
             {!! $errors->first('importe', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="validationDefault04" class="form-label">Fecha de pago:</label>
+            <label for="fechaPago" class="form-label">Fecha de pago:</label>
             <input type="date" class="form-control" name="fechaPago" value="{{ old('fechaPago') }}">
             {!! $errors->first('fechaPago', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="validationDefault05" class="form-label">Notas:</label>
-            <input type="text" class="form-control" name="notas" placeholder="Notas" value="{{ old('notas') }}">
+            <label for="notas" class="form-label">Notas:</label>
+            <textarea class="form-control" name="notas" placeholder="Notas">{{ old('notas') }}</textarea>
             {!! $errors->first('notas', '<span style="color: red;">:message</span>') !!}
         </div>
         <div>
-            <label for="validationDefault08" class="form-label">Pagada:</label>
+            <label for="pagada" class="form-label">Pagada:</label>
             <br>
-            <input class="form-check-input" type="radio" name="pagada" value="si"
+            <input class="form-check-input" type="radio" name="pagada" value="1"
                 {{ old('pagada') == 'si' ? 'checked' : '' }}> Sí
             <br>
-            <input class="form-check-input" type="radio" name="pagada" value="no"
+            <input class="form-check-input" type="radio" name="pagada" value="0"
                 {{ old('pagada') == 'no' ? 'checked' : '' }}> No
         </div>
 

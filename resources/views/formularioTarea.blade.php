@@ -79,8 +79,8 @@
             <label for="provincia" class="form-label">Provincia:</label>
             <select class="form-select" name="provincia">
                 @foreach ($provincias as $provincia)
-                    <option value="{{ $provincia->codPoblacion }}"
-                        {{ old('provincia') == $provincia->codPoblacion ? 'selected' : '' }}>
+                    <option value="{{ $provincia->nombre }}"
+                        {{ old('provincia') == $provincia->nombre ? 'selected' : '' }}>
                         {{ $provincia->nombre }}
                     </option>
                 @endforeach
@@ -103,7 +103,6 @@
         <div class="col-md-3">
             <label for="estado" class="form-label">Estado:</label>
             <select class="form-select" name="estado" id="estado">
-                <option value="B">B - Esperando ser aprobada</option>
                 <option value="P">P - Pendiente</option>
                 <option value="R">R - Realizada</option>
                 <option value="C">C - Cancelada</option>

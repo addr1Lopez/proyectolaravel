@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tarea;
+use App\Models\Cuota;
 
 class ControllerMantenimiento extends Controller
 {
@@ -13,16 +14,26 @@ class ControllerMantenimiento extends Controller
         return view('formMantenimiento', compact('tareas'));
     }
 
+    public function listar()
+    {
+        $cuotas = Cuota::orderBy('fechaEmision', 'desc')->paginate(7);
+        return view('listaCuotas', compact('cuotas'));
+    }
+
     public function validacionInsertar()
     {
-        request()->validate([
+        $datos = request()->validate([
+            'tarea' => '',
             'concepto' => 'required',
             'fechaEmision' => 'required',
-            'importe' => 'required',
-            'fechaPago' => 'required',
+            'importe' => 'required|numeric',
+            'fechaPago' => 'required|after:now',
             'notas' => 'required',
-            'pagada' => '',
+            'pagada' => 'required',
         ]);
-        return view('formMantenimiento');
+
+        Cuota::create($datos);
+        session()->flash('message', 'La cuota se ha registrado correctamente.');
+        return redirect()->route('listaCuotas');
     }
 }

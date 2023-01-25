@@ -49,6 +49,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('listaClientes') }}">Lista de clientes</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('listaCuotas') }}"> Lista de cuotas</a>
+                    </li>
                 </ul>
             </div>
         </div>

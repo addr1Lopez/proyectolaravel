@@ -21,7 +21,8 @@ use App\Http\Controllers\ControllerCliente;
 //     return view('welcome');
 // });
 
-//Route::get('/formularioEmpleado', 'App\Http\Controllers\ControllerEmpleado')->name('formularioEmpleado'); 
+
+// EMPLEADO
 Route::get('/formularioEmpleado', ControllerEmpleado::class)->name('formularioEmpleado');
 Route::post('formularioEmpleado',  [ControllerEmpleado::class, 'validacionInsertar']);
 
@@ -29,6 +30,7 @@ Route::get('/listaEmpleados', [ControllerEmpleado::class, 'listar'])->name('list
 Route::get('/confirmBorrarEmpleado/{empleado}', [ControllerEmpleado::class, 'confirmacionBorrar'])->name('confirmBorrarEmpleado');
 Route::delete('/borrarEmpleado/{empleado}', [ControllerEmpleado::class, 'borrarEmpleado'])->name('borrarEmpleado');
 
+// CLIENTE
 Route::get('/formularioCliente', ControllerCliente::class)->name('formularioCliente');
 Route::post('formularioCliente', [ControllerCliente::class, 'validacionInsertar']);
 
@@ -36,10 +38,13 @@ Route::get('/listaClientes', [ControllerCliente::class, 'listar'])->name('listaC
 Route::get('/confirmBorrarCliente/{cliente}', [ControllerCliente::class, 'confirmacionBorrar'])->name('confirmBorrarCliente');
 Route::delete('/borrarCliente/{cliente}', [ControllerCliente::class, 'borrarCliente'])->name('borrarCliente');
 
+// MANTENIMIENTO
 Route::get('/formMantenimiento', ControllerMantenimiento::class)->name('formMantenimiento');
 Route::post('formMantenimiento', [ControllerMantenimiento::class, 'validacionInsertar']);
 
-//Route::get('/formularioTarea/{id}', ControllerTarea::class)->name('formularioTarea');
+Route::get('/listaCuotas', [ControllerMantenimiento::class, 'listar'])->name('listaCuotas');
+
+// TAREA
 Route::get('/formularioTarea', ControllerTarea::class)->name('formularioTarea');
 Route::post('formularioTarea', [ControllerTarea::class, 'validacionInsertar']);
 
@@ -48,3 +53,6 @@ Route::get('/verDetalles/{tarea}', [ControllerTarea::class, 'verDetalles'])->nam
 
 Route::get('/confirmBorrarTarea/{tarea}', [ControllerTarea::class, 'confirmacionBorrar'])->name('confirmBorrarTarea');
 Route::delete('/borrarTarea/{tarea}', [ControllerTarea::class, 'borrarTarea'])->name('borrarTarea');
+
+Route::get('/editarTarea/{tarea}', [ControllerTarea::class, 'editar'])->name('editarTarea');
+Route::put('/editarTarea/{tarea}', [ControllerTarea::class, 'actualizar'])->name('actualizar');

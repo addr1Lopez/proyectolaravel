@@ -62,8 +62,40 @@ class ControllerTarea extends Controller
         $datos['fechaCreacion'] = (new \DateTime())->format('Y-m-d');
         Tarea::create($datos);
         session()->flash('message', 'La tarea / incidencia se ha registrado correctamente.');
+        
+        return redirect()->route('listaTareas');
+    }
 
 
-        return redirect()->route('formularioTarea');
+    public function editar(Tarea $tarea)
+    {
+        $clientes = Cliente::all();
+        $provincias = Provincia::all();
+        $empleados = Empleado::all();
+        return view('editarTarea', compact('tarea', 'clientes', 'provincias', 'empleados'));
+    }
+
+    public function actualizar(Tarea $tarea)
+    {
+        $validacion = request()->validate([
+            'cliente' => 'required',
+            'persona' => 'required',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+            'descripcion' => 'required',
+            'correo' => 'required|email',
+            'direccion' => 'required',
+            'poblacion' => 'required',
+            'codigoPostal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
+            'provincia' => 'required',
+            'operarioEncargado' => 'required',
+            'estado' => 'required',
+            'fechaRealizacion' => 'required|after:now',
+            'anotaciones_anteriores' => '',
+            'anotaciones_posteriores' => '',
+        ]);
+        
+        Tarea::where('id', $tarea->id)->update($validacion);
+        session()->flash('message', 'Tarea / incidencia actualizada con éxito');
+        return redirect()->route('listaTareas');
     }
 }

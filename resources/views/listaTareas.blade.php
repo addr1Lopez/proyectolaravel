@@ -54,34 +54,15 @@
                         <td>{{ $tarea->estado }}</td>
                         <td>{{ $tarea->fechaRealizacion }}</td>
                         <td><a class="btn btn-info" href="{{ route('verDetalles', $tarea) }}">🔍</a>&nbsp;
-                            <a class="btn btn-warning" href="#">✏️</a>
-                            <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}"><i
-                                    class="bi bi-trash3-fill"></i>🗑️</a>&nbsp;
+                            <a class="btn btn-warning" href="{{ route('editarTarea', $tarea) }}">✏️</a>
+                            <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}">🗑️</a>&nbsp;
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
         <div id="paginacion">
-            {{-- {{ $tareas->links() }} --}}
-            {{-- <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item {{ $tareas->currentPage() == 1 ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $tareas->previousPageUrl() }}">Anterior</a>
-                    </li>
-                    @for ($i = 1; $i <= $tareas->lastPage(); $i++)
-                        <li class="page-item {{ $tareas->currentPage() == $i ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $tareas->url($i) }}">{{ $i }}</a>
-                        </li>
-                    @endfor
-                    <li class="page-item {{ $tareas->currentPage() == $tareas->lastPage() ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $tareas->nextPageUrl() }}">Siguiente</a>
-                    </li>
-            
-                </ul>
-            </nav> --}}
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item {{ $tareas->currentPage() == 1 ? 'disabled' : '' }}">
