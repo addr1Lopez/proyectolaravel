@@ -8,11 +8,7 @@
         justify-content: center;
         align-items: center;
     }
-
-    #cuerpo {
-        margin: 2em;
-    }
-
+    
     h1 {
         text-align: center;
     }
@@ -25,10 +21,12 @@
         </div>
     @endif
     <h1>Lista de cuotas de mantenimiento</h1>
+    <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
             <thead class="table-warning">
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Tarea</th>
                     <th scope="col">Concepto</th>
                     <th scope="col">Fecha de emisión</th>
@@ -42,6 +40,7 @@
             <tbody>
                 @foreach ($cuotas as $cuota)
                     <tr>
+                        <td>{{ $cuota->id }}</td>
                         <td>{{ $cuota->tarea }}</td>
                         <td>{{ $cuota->concepto }}</td>
                         <td>{{ $cuota->fechaEmision }}</td>
@@ -50,7 +49,7 @@
                         <td>{{ $cuota->notas }}</td>
                         <td>{{ $cuota->pagada }}</td>
                         <td><a class="btn btn-warning" href="#">✏️</a>
-                            <a class="btn btn-danger" href="#">🗑️</a>
+                            <a class="btn btn-danger" href="{{ route('confirmBorrarCuota', $cuota) }}">🗑️</a>
                         </td>
                     </tr>
                 @endforeach

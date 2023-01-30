@@ -6,20 +6,27 @@
 
     <style>
         .botonAtras {
-            display: grid;
-            /* Establece el div como una cuadrícula */
-            place-items: center;
-            /* Centra el elemento en ambos ejes */
+            /* display: grid;
+                // Establece el div como una cuadrícula
+                place-items: center;
+                // Centra el elemento en ambos ejes */
+            position: absolute;
+            left: 10;
+            float: left;
         }
-        #cuerpo{
+
+        #cuerpo {
             margin-left: 35%;
             margin-right: 35%;
         }
+
         h1 {
             text-align: center;
         }
     </style>
-    <br>
+    <div class="botonAtras">
+        <a class="btn btn-danger" href="{{ route('listaTareas') }}">🡰 Volver atrás</a>
+    </div>
     <h1>Detalles de la tarea {{ $tarea->id }} </h1>
     <br>
     <div id="cuerpo">
@@ -83,10 +90,7 @@
                 </tr>
             </tbody>
         </table>
-        
-        <div class="botonAtras">
-            <a class="btn btn-danger" href="{{ route('listaTareas') }}">🡰 Volver atrás</a>
-        </div>
+
     </div>
 
 @endsection

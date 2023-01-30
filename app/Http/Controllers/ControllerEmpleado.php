@@ -36,7 +36,7 @@ class ControllerEmpleado extends Controller
 
     public function listar()
     {
-        $empleados = Empleado::orderBy('fechaAlta', 'desc')->paginate(2);
+        $empleados = Empleado::orderBy('fechaAlta', 'desc')->paginate(5);
         return view('listaEmpleados', compact('empleados'));
     }
 
@@ -49,6 +49,29 @@ class ControllerEmpleado extends Controller
     {
         $empleado->delete();
         session()->flash('message', 'El empleado se ha borrado exitosamente');
+        return redirect()->route('listaEmpleados');
+    }
+
+    public function editarEmpleado(Empleado $empleado)
+    {
+        return view('editarEmpleado', compact('empleado'));
+    }
+
+    public function actualizarEmpleado(Empleado $empleado)
+    {
+        $validacion = request()->validate([
+            'nif' => 'required',
+            'nombre' => 'required',
+            'clave' => 'required',
+            'correo' => 'required|email',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+            'direccion' => 'required',
+            'fechaAlta' => 'required|after:now',
+            'tipo' => 'required',            
+        ]);
+        
+        Empleado::where('id', $empleado->id)->update($validacion);
+        session()->flash('message', 'Empleado modificado con éxito');
         return redirect()->route('listaEmpleados');
     }
 }

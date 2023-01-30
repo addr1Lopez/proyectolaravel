@@ -9,10 +9,6 @@
         align-items: center;
     }
 
-    #cuerpo {
-        margin: 2em;
-    }
-
     h1 {
         text-align: center;
     }
@@ -25,6 +21,7 @@
         </div>
     @endif
     <h1>Lista de clientes</h1>
+    <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
             <thead class="table-warning">
@@ -51,9 +48,8 @@
                         <td>{{ $cliente->importe }}</td>
                         <td>{{ $cliente->pais }}</td>
                         <td>{{ $cliente->moneda }}</td>
-                        <td><a class="btn btn-warning" href="#">✏️</a>
-                            <a class="btn btn-danger" href=" {{ route('confirmBorrarCliente', $cliente) }}"><i
-                                    class="bi bi-trash3-fill"></i>🗑️</a>&nbsp;
+                        <td>
+                            <a class="btn btn-danger" href=" {{ route('confirmBorrarCliente', $cliente) }}">🗑️</a>
                         </td>
 
                     </tr>

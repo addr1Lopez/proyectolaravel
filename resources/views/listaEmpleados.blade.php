@@ -9,10 +9,6 @@
         align-items: center;
     }
 
-    #cuerpo {
-        margin: 2em;
-    }
-
     h1 {
         text-align: center;
     }
@@ -21,6 +17,7 @@
 @section('contenido')
     
     <h1>Lista de empleados</h1>
+    <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
             <thead class="table-warning">
@@ -47,9 +44,8 @@
                         <td>{{ $empleado->direccion }}</td>
                         <td>{{ $empleado->fechaAlta }}</td>
                         <td>{{ $empleado->tipo }}</td>
-                        <td><a class="btn btn-warning" href="#">✏️</a>
-                            <a class="btn btn-danger" href=" {{ route('confirmBorrarEmpleado', $empleado) }}"><i
-                                    class="bi bi-trash3-fill"></i>🗑️</a>&nbsp;
+                        <td><a class="btn btn-warning" href="{{ route('editarEmpleado', $empleado) }}">✏️</a>
+                            <a class="btn btn-danger" href=" {{ route('confirmBorrarEmpleado', $empleado) }}">🗑️</a>
                         </td>
 
                     </tr>

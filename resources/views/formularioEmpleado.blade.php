@@ -4,12 +4,6 @@
 
 @section('contenido')
 
-    <style>
-        #formulario {
-            margin: 20px;
-        }
-    </style>
-
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}

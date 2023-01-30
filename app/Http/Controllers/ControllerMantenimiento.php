@@ -16,7 +16,7 @@ class ControllerMantenimiento extends Controller
 
     public function listar()
     {
-        $cuotas = Cuota::orderBy('fechaEmision', 'desc')->paginate(7);
+        $cuotas = Cuota::orderBy('fechaEmision', 'desc')->paginate(5);
         return view('listaCuotas', compact('cuotas'));
     }
 
@@ -34,6 +34,18 @@ class ControllerMantenimiento extends Controller
 
         Cuota::create($datos);
         session()->flash('message', 'La cuota se ha registrado correctamente.');
+        return redirect()->route('listaCuotas');
+    }
+
+    public function confirmacionBorrar(Cuota $cuota)
+    {
+        return view('confirmBorrarCuota', compact('cuota'));
+    }
+
+    public function borrarCuota(Cuota $cuota)
+    {
+        $cuota->delete();
+        session()->flash('message', 'La cuota se ha borrado exitosamente');
         return redirect()->route('listaCuotas');
     }
 }

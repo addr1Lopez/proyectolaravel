@@ -9,10 +9,6 @@
         align-items: center;
     }
 
-    #cuerpo {
-        margin: 2em;
-    }
-
     h1 {
         text-align: center;
     }
@@ -25,6 +21,7 @@
         </div>
     @endif
     <h1>Lista de tareas</h1>
+    <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
             <thead class="table-warning">
@@ -53,9 +50,9 @@
                         <td>{{ $tarea->operarioEncargado }}</td>
                         <td>{{ $tarea->estado }}</td>
                         <td>{{ $tarea->fechaRealizacion }}</td>
-                        <td><a class="btn btn-info" href="{{ route('verDetalles', $tarea) }}">🔍</a>&nbsp;
+                        <td><a class="btn btn-info" href="{{ route('verDetalles', $tarea) }}">🔍</a>
                             <a class="btn btn-warning" href="{{ route('editarTarea', $tarea) }}">✏️</a>
-                            <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}">🗑️</a>&nbsp;
+                            <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}">🗑️</a>
                         </td>
                     </tr>
                 @endforeach

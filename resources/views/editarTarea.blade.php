@@ -28,7 +28,7 @@
         </div>
         <br>
         <div class="col-md-3">
-            <label for="descripcion">Teléfono:</label>
+            <label for="telefono">Teléfono:</label>
             <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono"
                 value="{{ old('telefono') ?? $tarea->telefono }}">
             {!! $errors->first('telefono', '<span style="color: red;">:message</span>') !!}
@@ -42,7 +42,7 @@
         </div>
         <br>
         <div class="col-md-3">
-            <label for="descripcion">Correo:</label>
+            <label for="correo">Correo:</label>
             <input type="text" class="form-control" id="correo" name="correo" placeholder="Correo"
                 value="{{ old('correo') ?? $tarea->correo }}">
             {!! $errors->first('correo', '<span style="color: red;">:message</span>') !!}
@@ -63,7 +63,7 @@
         </div>
         <br>
         <div class="col-md-3">
-            <label for="operarioEncargado">Código postal:</label>
+            <label for="codigoPostal">Código postal:</label>
             <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="Código postal"
                 value="{{ old('codigoPostal') ?? $tarea->codigoPostal }} ">
             {!! $errors->first('codigoPostal', '<span style="color: red;">:message</span>') !!}
@@ -131,11 +131,16 @@
             {!! $errors->first('anotaciones_posteriores', '<span style="color: red;">:message</span>') !!}
         </div>
         <br>
+        <div class="col-md-3">
+            <label for="fechaCreacion">Fecha de creación:</label>
+            <span type="text" name="fechaCreacion" class="form-control" id="fechaCreacion"
+                placeholder="fechaCreacion">{{ date('d-m-Y', strtotime($tarea->fechaCreacion)) }}</span>
+        </div>
         <div class="row-3">
-            <button type="submit" class="btn btn-primary">✏️ Actualizar</button>
+            <button type="submit" class="btn btn-success">✏️ Actualizar</button>
             <a class="btn btn-danger" href="{{ route('listaTareas') }}">🡰 Volver atrás</a>
         </div>
-        
+
     </form>
 
 
