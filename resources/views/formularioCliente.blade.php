@@ -55,17 +55,17 @@
         </div>
 
         <div class="col-md-3">
-            <label for="validationDefault05" class="form-label">Pais:</label>
-            <select class="form-select" name="pais">
-                @foreach ($paises as $pais)
-                    @if ($pais->nombre_moneda != null)
-                        <option value="{{ $pais->nombre }}">{{ $pais->nombre }}</option>
-                    @endif
-                @endforeach
-            </select>
+            <label for="paises_id" class="form-label">Pais:</label>
+            <select class="form-select" name="paises_id">
+            @foreach ($paises as $pais)
+              <option value="{{ $pais->id }}" {{ old('paises_id') == $pais->id ? 'selected' : '' }}>{{ $pais->nombre }}</option>
+            @endforeach
+          </select>
         </div>
+        
+
         <div class="col-md-3">
-            <label for="validationDefault06" class="form-label">Moneda:</label>
+            <label for="moneda" class="form-label">Moneda:</label>
             <select class="form-select" name="moneda">
                 <?php $monedasMostradas = []; ?>
                 @foreach ($paises as $pais)

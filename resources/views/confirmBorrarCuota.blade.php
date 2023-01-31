@@ -13,7 +13,7 @@
             <table class="table">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Tarea</th>
+                        <th scope="col">Cliente</th>
                         <th scope="col">Concepto</th>
                         <th scope="col">Fecha de emisión</th>
                         <th scope="col">Importe</th>
@@ -24,14 +24,20 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ $cuota->tarea }}</td>
+                        <td>
+                            @if ($cuota->cliente)
+                                {{ $cuota->cliente->cif }}
+                            @else
+                                Cliente dado de baja
+                            @endif
+                        </td>
                         <td>{{ $cuota->concepto }}</td>
                         <td>{{ $cuota->fechaEmision }}</td>
                         <td>{{ $cuota->importe }}</td>
                         <td>{{ $cuota->fechaPago }}</td>
                         <td>{{ $cuota->notas }}</td>
                         <td>{{ $cuota->pagada }}</td>
-                        
+
                     </tr>
                 </tbody>
             </table>

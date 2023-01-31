@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tarea;
 use App\Models\Cuota;
+use App\Models\Cliente;
 
 class ControllerMantenimiento extends Controller
 {
     public function __invoke(Request $request)
     {
-        $tareas = Tarea::all();
-        return view('formMantenimiento', compact('tareas'));
+        // $tareas = Tarea::all();
+        $clientes = Cliente::all();
+        return view('formMantenimiento', compact('clientes'));
     }
 
     public function listar()
     {
+        $clientes = Cliente::all();
         $cuotas = Cuota::orderBy('fechaEmision', 'desc')->paginate(5);
-        return view('listaCuotas', compact('cuotas'));
+        return view('listaCuotas', compact('cuotas', 'clientes'));
     }
 
     public function validacionInsertar()
     {
         $datos = request()->validate([
-            'tarea' => '',
+            'clientes_id' => 'required',
             'concepto' => 'required',
             'fechaEmision' => 'required',
             'importe' => 'required|numeric',

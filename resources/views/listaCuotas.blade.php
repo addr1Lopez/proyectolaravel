@@ -8,7 +8,7 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     h1 {
         text-align: center;
     }
@@ -27,7 +27,7 @@
             <thead class="table-warning">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Tarea</th>
+                    <th scope="col">Cliente</th>
                     <th scope="col">Concepto</th>
                     <th scope="col">Fecha de emisión</th>
                     <th scope="col">Importe</th>
@@ -41,7 +41,13 @@
                 @foreach ($cuotas as $cuota)
                     <tr>
                         <td>{{ $cuota->id }}</td>
-                        <td>{{ $cuota->tarea }}</td>
+                        <td>
+                            @if ($cuota->cliente)
+                                {{ $cuota->cliente->cif }}
+                            @else
+                                Cliente dado de baja
+                            @endif
+                        </td>
                         <td>{{ $cuota->concepto }}</td>
                         <td>{{ $cuota->fechaEmision }}</td>
                         <td>{{ $cuota->importe }}</td>

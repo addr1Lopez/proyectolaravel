@@ -15,15 +15,15 @@
         <h1> Añadir una tarea / incidencia: </h1>
 
         <div class="col-md-3">
-            <label for="cliente" class="form-label">Cliente que encarga el trabajo:</label>
-            <select class="form-select" name="cliente">
+            <label for="clientes_id" class="form-label">Cliente que encarga el trabajo:</label>
+            <select class="form-select" name="clientes_id">
                 @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->cif }}" {{ old('cliente') == $cliente->cif ? 'selected' : '' }}>
+                    <option value="{{ $cliente->id }}" {{ old('clientes_id') == $cliente->id ? 'selected' : '' }}>
                         {{ $cliente->nombre }}
                     </option>
                 @endforeach
             </select>
-            {!! $errors->first('operarioEncargado', '<span style=color:red>:message</span>') !!}
+            {!! $errors->first('clientes_id', '<span style=color:red>:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="persona" class="form-label">Persona de contacto:</label>
@@ -43,7 +43,7 @@
             {!! $errors->first('descripcion', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="validationDefaultUsername" class="form-label">Correo:</label>
+            <label for="validationDefaultUsername" class="form-label">Correo electrónico:</label>
             <div class="input-group">
                 <span class="input-group-text" id="inputGroupPrepend2">@</span>
                 <input type="text" class="form-control" name="correo" placeholder="Correo"
@@ -83,16 +83,16 @@
         </div>
         <div class="col-md-3">
             <label for="operario" class="form-label">Operario encargado</label>
-            <select class="form-select" name="operarioEncargado">
+            <select class="form-select" name="empleados_id">
                 @foreach ($empleados as $empleado)
                     @if ($empleado->tipo == 1)
-                        <option value="{{ $empleado->nif }}"
-                            {{ old('operarioEncargado') == $empleado->nif ? 'selected' : '' }}>{{ $empleado->nombre }}
+                        <option value="{{ $empleado->id }}"
+                            {{ old('empleados_id') == $empleado->id ? 'selected' : '' }}>{{ $empleado->nombre }}
                         </option>
                     @endif
                 @endforeach
             </select>
-            {!! $errors->first('operarioEncargado', '<span style=color:red>:message</span>') !!}
+            {!! $errors->first('empleados_id', '<span style=color:red>:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="estado" class="form-label">Estado:</label>

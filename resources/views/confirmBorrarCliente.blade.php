@@ -31,7 +31,13 @@
                         <td>{{ $cliente->telefono }}</td>
                         <td>{{ $cliente->cuenta }}</td>
                         <td>{{ $cliente->importe }}</td>
-                        <td>{{ $cliente->pais }}</td>
+                        <td>
+                            @if ($cliente->pais)
+                                {{ $cliente->pais->nombre }}
+                            @else
+                                Empleado dado de baja
+                            @endif
+                        </td>
                         <td>{{ $cliente->moneda }}</td>
                     </tr>
                 </tbody>

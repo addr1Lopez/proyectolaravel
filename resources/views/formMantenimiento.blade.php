@@ -8,11 +8,11 @@
         @csrf
         <h1> Formulario de mantenimiento: </h1>
         <div class="col-md-3">
-            <label for="tarea" class="form-label">Tarea:</label>
-            <select class="form-select" name="tarea">
-                @foreach ($tareas as $tarea)
-                    <option value="{{ $tarea->id }}" {{ old('tarea') == $tarea->id ? 'selected' : '' }}>
-                        {{ $tarea->id }}
+            <label for="clientes_id" class="form-label">Cliente:</label>
+            <select class="form-select" name="clientes_id">
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                    {{ $cliente->nombre }}
                     </option>
                 @endforeach
             </select>

@@ -31,7 +31,13 @@
                 <tbody>
                     <tr>
                         <td>{{ $tarea->id }}</td>
-                        <td>{{ $tarea->cliente }}</td>
+                        <td>
+                            @if ($tarea->cliente)
+                                {{ $tarea->cliente->cif }}
+                            @else
+                                Cliente dado de baja
+                            @endif
+                        </td>
                         <td>{{ $tarea->persona }}</td>
                         <td>{{ $tarea->telefono }}</td>
                         <td>{{ $tarea->descripcion }}</td>
@@ -40,7 +46,13 @@
                         <td>{{ $tarea->poblacion }}</td>
                         <td>{{ $tarea->codigoPostal }}</td>
                         <td>{{ $tarea->provincia }}</td>
-                        <td>{{ $tarea->operarioEncargado }}</td>
+                        <td>
+                            @if ($tarea->empleado)
+                                {{ $tarea->empleado->nif }}
+                            @else
+                                Empleado dado de baja
+                            @endif
+                        </td>
                         <td>{{ $tarea->estado }}</td>
                         <td>{{ $tarea->fechaRealizacion }}</td>
                     </tr>

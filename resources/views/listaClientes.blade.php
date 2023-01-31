@@ -46,7 +46,7 @@
                         <td>{{ $cliente->telefono }}</td>
                         <td>{{ $cliente->cuenta }}</td>
                         <td>{{ $cliente->importe }}</td>
-                        <td>{{ $cliente->pais }}</td>
+                        <td>{{ $cliente->pais->nombre }}</td>
                         <td>{{ $cliente->moneda }}</td>
                         <td>
                             <a class="btn btn-danger" href=" {{ route('confirmBorrarCliente', $cliente) }}">🗑️</a>

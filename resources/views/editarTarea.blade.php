@@ -10,9 +10,9 @@
         @method('PUT')
         <div class="col-md-3">
             <label for="cliente">Cliente:</label>
-            <select class="form-select" name="cliente">
+            <select class="form-select" name="clientes_id">
                 @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->cif }}" {{ old('cliente') == $cliente->cif ? 'selected' : '' }}>
+                    <option value="{{ $cliente->cif }}" {{ old('clientes_id') == $cliente->cif ? 'selected' : '' }}>
                         {{ $cliente->nombre }}
                     </option>
                 @endforeach

@@ -24,14 +24,14 @@ class ControllerCliente extends Controller
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'cuenta' => 'required|regex:/^ES\d{2}\d{4}\d{4}\d{2}\d{10}$/',
             'importe' => 'required',
-            'pais' => 'required',
+            'paises_id' => 'required',
             'moneda' => 'required',
         ]);
 
         Cliente::create($datos);
         session()->flash('message', 'El cliente ha sido registrado correctamente.');
 
-        return redirect()->route('formularioCliente');
+        return redirect()->route('listaClientes');
        
     }
     

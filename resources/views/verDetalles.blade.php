@@ -34,7 +34,7 @@
             <tbody>
                 <tr>
                     <td>Cliente</td>
-                    <td>{{ $tarea->cliente }}</td>
+                    <td>{{ $tarea->cliente->cif }}</td>
                 </tr>
                 <tr>
                     <td>Persona</td>
@@ -70,7 +70,7 @@
                 </tr>
                 <tr>
                     <td>Operario Encargado</td>
-                    <td>{{ $tarea->operarioEncargado }}</td>
+                    <td>{{ $tarea->empleado->nif }}</td>
                 </tr>
                 <tr>
                     <td>Estado</td>

@@ -21,8 +21,10 @@ class ControllerTarea extends Controller
 
     public function listar()
     {
+        $clientes = Cliente::all();
+        $empleados = Empleado::all();
         $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(5);
-        return view('listaTareas', compact('tareas'));
+        return view('listaTareas', compact('tareas','clientes','empleados'));
     }
 
     public function verDetalles(Tarea $tarea)
@@ -46,7 +48,7 @@ class ControllerTarea extends Controller
     public function validacionInsertar()
     {
         $datos = request()->validate([
-            'cliente' => 'required',
+            'clientes_id' => 'required',
             'persona' => 'required',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'descripcion' => 'required',
@@ -55,7 +57,7 @@ class ControllerTarea extends Controller
             'poblacion' => 'required',
             'codigoPostal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
             'provincia' => 'required',
-            'operarioEncargado' => 'required',
+            'empleados_id' => 'required',
             'estado' => 'required',
             'fechaRealizacion' => 'required|after:now',
         ]);

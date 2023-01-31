@@ -42,12 +42,26 @@
                 @foreach ($tareas as $tarea)
                     <tr>
                         <td>{{ $tarea->id }}</td>
-                        <td>{{ $tarea->cliente }}</td>
+                        {{-- <td>{{ $tarea->clientes->cif }}</td> --}}
+                        <td>
+                            @if ($tarea->cliente)
+                                {{ $tarea->cliente->cif }}
+                            @else
+                                Cliente dado de baja
+                            @endif
+                        </td>
                         <td>{{ $tarea->persona }}</td>
                         <td>{{ $tarea->descripcion }}</td>
                         <td>{{ $tarea->direccion }}</td>
                         <td>{{ $tarea->poblacion }}</td>
-                        <td>{{ $tarea->operarioEncargado }}</td>
+                        {{-- <td>{{ $tarea->empleados->id }}</td> --}}
+                        <td>
+                            @if ($tarea->empleado)
+                                {{ $tarea->empleado->nif }}
+                            @else
+                                Empleado dado de baja
+                            @endif
+                        </td>
                         <td>{{ $tarea->estado }}</td>
                         <td>{{ $tarea->fechaRealizacion }}</td>
                         <td><a class="btn btn-info" href="{{ route('verDetalles', $tarea) }}">🔍</a>
