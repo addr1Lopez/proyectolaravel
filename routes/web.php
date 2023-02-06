@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerTarea;
 use App\Http\Controllers\ControllerEmpleado;
-use App\Http\Controllers\ControllerMantenimiento;
+use App\Http\Controllers\ControllerCuotas;
 use App\Http\Controllers\ControllerCliente;
+use App\Http\Controllers\ControllerRemesa;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,15 +57,25 @@ Route::delete('/borrarCliente/{cliente}', [ControllerCliente::class, 'borrarClie
 // MANTENIMIENTO --------------------------------------------------------------------------------------------------------------------
 
 // Insertar
-Route::get('/formMantenimiento', ControllerMantenimiento::class)->name('formMantenimiento');
-Route::post('formMantenimiento', [ControllerMantenimiento::class, 'validacionInsertar']);
+Route::get('/formMantenimiento', ControllerCuotas::class, 'formMantenimiento')->name('formMantenimiento');
+Route::post('formMantenimiento', [ControllerCuotas::class, 'validarCuotaExcepcional']);
+
+Route::get('/formularioRemesa', ControllerRemesa::class, 'formularioRemesa')->name('formularioRemesa');
+Route::post('formularioRemesa', [ControllerRemesa::class, 'validacionInsertarRemesa']);
+
+Route::get('/formularioCuota', ControllerCuotas::class, 'formularioCuota')->name('formularioCuota');
+Route::post('formularioCuota', [ControllerCuotas::class, 'validarCuotaExcepcional']);
 
 // Listar
-Route::get('/listaCuotas', [ControllerMantenimiento::class, 'listar'])->name('listaCuotas');
+Route::get('/listaCuotas', [ControllerCuotas::class, 'listar'])->name('listaCuotas');
 
 // Borrar
-Route::get('/confirmBorrarCuota/{cuota}', [ControllerMantenimiento::class, 'confirmacionBorrar'])->name('confirmBorrarCuota');
-Route::delete('/borrarCuota/{cuota}', [ControllerMantenimiento::class, 'borrarCuota'])->name('borrarCuota');
+Route::get('/confirmBorrarCuota/{cuota}', [ControllerCuotas::class, 'confirmacionBorrar'])->name('confirmBorrarCuota');
+Route::delete('/borrarCuota/{cuota}', [ControllerCuotas::class, 'borrarCuota'])->name('borrarCuota');
+
+// Modificar
+Route::get('/editarCuota/{cuota}', [ControllerCuotas::class, 'editarCuota'])->name('editarCuota');
+Route::put('/editarCuota/{cuota}', [ControllerCuotas::class, 'actualizarCuota'])->name('actualizarCuota');
 
 // TAREA --------------------------------------------------------------------------------------------------------------------
     

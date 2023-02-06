@@ -42,7 +42,6 @@
                 @foreach ($tareas as $tarea)
                     <tr>
                         <td>{{ $tarea->id }}</td>
-                        {{-- <td>{{ $tarea->clientes->cif }}</td> --}}
                         <td>
                             @if ($tarea->cliente)
                                 {{ $tarea->cliente->cif }}

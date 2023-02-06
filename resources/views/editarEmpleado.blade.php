@@ -6,7 +6,7 @@
 
     <form class="row g-3" action="{{ route('actualizarEmpleado', $empleado) }}" method="POST">
         @csrf
-        <h1> Modificar un empleado: </h1>
+        <h1> Modificación del empleado: </h1>
         @method('PUT')
         <div class="col-md-3">
             <label for="nif">NIF:</label>

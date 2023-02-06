@@ -80,7 +80,7 @@ class ControllerTarea extends Controller
     public function actualizar(Tarea $tarea)
     {
         $validacion = request()->validate([
-            'cliente' => 'required',
+            'clientes_id' => 'required',
             'persona' => 'required',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'descripcion' => 'required',
@@ -89,7 +89,7 @@ class ControllerTarea extends Controller
             'poblacion' => 'required',
             'codigoPostal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
             'provincia' => 'required',
-            'operarioEncargado' => 'required',
+            'empleados_id' => 'required',
             'estado' => 'required',
             'fechaRealizacion' => 'required|after:now',
             'anotaciones_anteriores' => '',

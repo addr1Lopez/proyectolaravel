@@ -1,4 +1,4 @@
-@section('titulo', 'Lista de cuotas de mantenimiento')
+@section('titulo', 'Lista de cuotas')
 
 @extends('template')
 
@@ -20,7 +20,7 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <h1>Lista de cuotas de mantenimiento</h1>
+    <h1>Lista de cuotas</h1>
     <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
@@ -54,7 +54,7 @@
                         <td>{{ $cuota->fechaPago }}</td>
                         <td>{{ $cuota->notas }}</td>
                         <td>{{ $cuota->pagada }}</td>
-                        <td><a class="btn btn-warning" href="#">✏️</a>
+                        <td><a class="btn btn-warning" href="{{ route('editarCuota', $cuota) }}">✏️</a>
                             <a class="btn btn-danger" href="{{ route('confirmBorrarCuota', $cuota) }}">🗑️</a>
                         </td>
                     </tr>

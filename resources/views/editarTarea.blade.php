@@ -12,7 +12,8 @@
             <label for="cliente">Cliente:</label>
             <select class="form-select" name="clientes_id">
                 @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->cif }}" {{ old('clientes_id') == $cliente->cif ? 'selected' : '' }}>
+                    <option value="{{ $cliente->id }}"
+                        {{ old('clientes_id') == $cliente->id ? 'selected' : ($tarea->clientes_id == $cliente->id ? 'selected' : '') }}>
                         {{ $cliente->nombre }}
                     </option>
                 @endforeach
@@ -83,12 +84,12 @@
         </div>
         <br>
         <div class="col-md-3">
-            <label for="operarioEncargado">Operario Encargado:</label>
-            <select class="form-select" name="operarioEncargado">
+            <label for="empleados_id">Operario Encargado:</label>
+            <select class="form-select" name="empleados_id">
                 @foreach ($empleados as $empleado)
                     @if ($empleado->tipo == 1)
-                        <option value="{{ $empleado->nif }}"
-                            {{ old('operarioEncargado') == $empleado->nif || (old('operarioEncargado') == null && $tarea->operarioEncargado == $empleado->nif) ? 'selected' : '' }}>
+                        <option value="{{ $empleado->id }}"
+                            {{ old('empleados_id') == $empleado->id || (old('empleados_id') == null && $tarea->empleados_id == $empleado->id) ? 'selected' : '' }}>
                             {{ $empleado->nombre }}</option>
                     @endif
                 @endforeach
@@ -117,16 +118,14 @@
         <br>
         <div class="col-md-3">
             <label for="anotaciones_anteriores">Anotaciones anteriores:</label>
-            <textarea class="form-control" id="anotaciones_anteriores" name="anotaciones_anteriores"
-                placeholder="Anotaciones anteriores">{{ old('anotaciones_anteriores') ?? $tarea->anotaciones_anteriores }}
+            <textarea class="form-control" id="anotaciones_anteriores" name="anotaciones_anteriores">{{ old('anotaciones_anteriores')??$tarea->anotaciones_anteriores }}
             </textarea>
             {!! $errors->first('anotaciones_anteriores', '<span style="color: red;">:message</span>') !!}
         </div>
         <br>
         <div class="col-md-3">
             <label for="anotaciones_posteriores">Anotaciones posteriores:</label>
-            <textarea class="form-control" id="anotaciones_posteriores" name="anotaciones_posteriores"
-                placeholder="Anotaciones posteriores">{{ old('anotaciones_posteriores') ?? $tarea->anotaciones_posteriores }}
+            <textarea class="form-control" id="anotaciones_posteriores" name="anotaciones_posteriores">{{ old('anotaciones_posteriores')??$tarea->anotaciones_posteriores }}
             </textarea>
             {!! $errors->first('anotaciones_posteriores', '<span style="color: red;">:message</span>') !!}
         </div>

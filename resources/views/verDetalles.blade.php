@@ -7,9 +7,9 @@
     <style>
         .botonAtras {
             /* display: grid;
-                // Establece el div como una cuadrícula
-                place-items: center;
-                // Centra el elemento en ambos ejes */
+                            // Establece el div como una cuadrícula
+                            place-items: center;
+                            // Centra el elemento en ambos ejes */
             position: absolute;
             left: 10;
             float: left;
@@ -33,59 +33,71 @@
         <table class="table table-striped table-hover">
             <tbody>
                 <tr>
-                    <td>Cliente</td>
-                    <td>{{ $tarea->cliente->cif }}</td>
+                    <td><b>Cliente</b></td>
+                    <td>
+                        @if ($tarea->cliente)
+                            {{ $tarea->cliente->cif }}
+                        @else
+                            Cliente dado de baja
+                        @endif
+                    </td>
                 </tr>
                 <tr>
-                    <td>Persona</td>
+                    <td><b>Persona</b></td>
                     <td>{{ $tarea->persona }}</td>
                 </tr>
                 <tr>
-                    <td>Teléfono</td>
+                    <td><b>Teléfono</b></td>
                     <td>{{ $tarea->telefono }}</td>
                 </tr>
                 <tr>
-                    <td>Descripción</td>
+                    <td><b>descripción</b></td>
                     <td>{{ $tarea->descripcion }}</td>
                 </tr>
                 <tr>
-                    <td>Correo</td>
+                    <td><b>Correo</b></td>
                     <td>{{ $tarea->correo }}</td>
                 </tr>
                 <tr>
-                    <td>Dirección</td>
+                    <td><b>Dirección</b></td>
                     <td>{{ $tarea->direccion }}</td>
                 </tr>
                 <tr>
-                    <td>Población</td>
+                    <td><b>Población</b></td>
                     <td>{{ $tarea->poblacion }}</td>
                 </tr>
                 <tr>
-                    <td>Codigo postal</td>
+                    <td><b>Código Postal</b></td>
                     <td>{{ $tarea->codigoPostal }}</td>
                 </tr>
                 <tr>
-                    <td>Provincia</td>
+                    <td><b>Provincia</b></td>
                     <td>{{ $tarea->provincia }}</td>
                 </tr>
                 <tr>
-                    <td>Operario Encargado</td>
-                    <td>{{ $tarea->empleado->nif }}</td>
+                    <td><b>Operario Encargado</b></td>
+                    <td>
+                        @if ($tarea->empleado)
+                            {{ $tarea->empleado->nif }}
+                        @else
+                            Empleado dado de baja
+                        @endif
+                    </td>
                 </tr>
                 <tr>
-                    <td>Estado</td>
+                    <td><b>Estado</b></td>
                     <td>{{ $tarea->estado }}</td>
                 </tr>
                 <tr>
-                    <td>Fecha de realización</td>
+                    <td><b>Fecha de realización</b></td>
                     <td>{{ $tarea->fechaRealizacion }}</td>
                 </tr>
                 <tr>
-                    <td>Anotaciones anteriores</td>
+                    <td><b>Anotaciones anteriores</b></td>
                     <td>{{ $tarea->anotaciones_anteriores }}</td>
                 </tr>
                 <tr>
-                    <td>Anotaciones posteriores</td>
+                    <td><b>Anotaciones posteriores</b></td>
                     <td>{{ $tarea->anotaciones_posteriores }}</td>
                 </tr>
             </tbody>
