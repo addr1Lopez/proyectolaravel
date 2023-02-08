@@ -10,42 +10,42 @@
         @method('PUT')
         <div class="col-md-3">
             <label for="nif">NIF:</label>
-            <input type="text" class="form-control" id="nif" name="nif" placeholder="NIF"
+            <input type="text" class="form-control" id="nif" name="nif"
                 value="{{ old('nif') ?? $empleado->nif }}">
             {!! $errors->first('nif', '<span style="color: red;">:message</span>') !!}
         </div>
         <br>
         <div class="col-md-3">
             <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre:"
+            <input type="text" class="form-control" id="nombre" name="nombre"
                 value="{{ old('nombre') ?? $empleado->nombre }}">
             {!! $errors->first('nombre', '<span style="color: red;">:message</span>') !!}
         </div>
         <br>
         <div class="col-md-3">
-            <label for="clave">Clave:</label>
-            <input type="text" class="form-control" id="clave" name="clave" placeholder="Clave"
-                value="{{ old('clave') ?? $empleado->clave }}">
-            {!! $errors->first('clave', '<span style="color: red;">:message</span>') !!}
+            <label for="clave">Contraseña:</label>
+            <input type="text" class="form-control" id="password" name="password"
+                value="{{ old('password') ?? $empleado->password }}">
+            {!! $errors->first('password', '<span style="color: red;">:message</span>') !!}
         </div>
         <br>
         <div class="col-md-3">
-            <label for="descripcion">Correo:</label>
-            <input type="text" class="form-control" id="correo" name="correo" placeholder="Correo"
-                value="{{ old('correo') ?? $empleado->correo }}">
-            {!! $errors->first('correo', '<span style="color: red;">:message</span>') !!}
+            <label for="descripcion">Email:</label>
+            <input type="text" class="form-control" id="email" name="email"
+                value="{{ old('email') ?? $empleado->email }}">
+            {!! $errors->first('email', '<span style="color: red;">:message</span>') !!}
         </div>
         <br>
         <div class="col-md-3">
             <label for="telefono">Teléfono:</label>
-            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono"
+            <input type="text" class="form-control" id="telefono" name="telefono"
                 value="{{ old('telefono') ?? $empleado->telefono }}">
             {!! $errors->first('telefono', '<span style="color: red;">:message</span>') !!}
         </div>
         <br>
         <div class="col-md-3">
             <label for="direccion">Dirección:</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección"
+            <input type="text" class="form-control" id="direccion" name="direccion"
                 value="{{ old('direccion') ?? $empleado->direccion }} ">
             {!! $errors->first('direccion', '<span style="color: red;">:message</span>') !!}
         </div>

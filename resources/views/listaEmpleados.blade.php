@@ -24,8 +24,7 @@
                 <tr>
                     <th scope="col">NIF</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Clave</th>
-                    <th scope="col">Correo</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Dirección</th>
                     <th scope="col">Fecha de alta</th>
@@ -38,8 +37,7 @@
                     <tr>
                         <td>{{ $empleado->nif }}</td>
                         <td>{{ $empleado->nombre }}</td>
-                        <td>{{ $empleado->clave }}</td>
-                        <td>{{ $empleado->correo }}</td>
+                        <td>{{ $empleado->email }}</td>
                         <td>{{ $empleado->telefono }}</td>
                         <td>{{ $empleado->direccion }}</td>
                         <td>{{ $empleado->fechaAlta }}</td>

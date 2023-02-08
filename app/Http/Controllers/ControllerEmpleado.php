@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Empleado;
 use App\Rules\DniRule;
+use Illuminate\Support\Facades\Hash;
 
 class ControllerEmpleado extends Controller
 {
@@ -18,20 +19,20 @@ class ControllerEmpleado extends Controller
         $datos = request()->validate([
             'nif' => ['required', new DniRule],
             'nombre' => 'required',
-            'correo' => 'required|email',
-            'clave' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'direccion' => 'required',
             'fechaAlta' => 'required',
             'tipo' => 'required',
         ]);
 
+        $datos['password'] = Hash::make($datos['password']);
+
         Empleado::create($datos);
         session()->flash('message', 'El empleado ha sido registrado correctamente.');
 
-        //return request();
-        return redirect()->route('formularioEmpleado');
-        //return view('formAñadirTarea');
+        return redirect()->route('listaEmpleados');
     }
 
     public function listar()
@@ -62,14 +63,16 @@ class ControllerEmpleado extends Controller
         $validacion = request()->validate([
             'nif' => 'required',
             'nombre' => 'required',
-            'clave' => 'required',
-            'correo' => 'required|email',
+            'password' => 'required',
+            'email' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'direccion' => 'required',
             'fechaAlta' => 'required|after:now',
             'tipo' => 'required',            
         ]);
         
+        $validacion['password'] = Hash::make($validacion['password']);
+
         Empleado::where('id', $empleado->id)->update($validacion);
         session()->flash('message', 'Empleado modificado con éxito');
         return redirect()->route('listaEmpleados');

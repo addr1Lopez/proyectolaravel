@@ -6,6 +6,7 @@ use App\Http\Controllers\ControllerEmpleado;
 use App\Http\Controllers\ControllerCuotas;
 use App\Http\Controllers\ControllerCliente;
 use App\Http\Controllers\ControllerRemesa;
+use App\Http\Controllers\SessionController;
 
 
 /*
@@ -22,6 +23,18 @@ use App\Http\Controllers\ControllerRemesa;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+// LOGIN
+
+Route::get('/', function () {
+    return view('login');
+});
+
+// Iniciar sesion
+Route::post('/', [SessionController::class, 'login'])->name('login');
+
+// Cerrar sesion
+Route::post('logout', [SessionController::class, 'logout'])->name('logout');
 
 
 // EMPLEADO --------------------------------------------------------------------------------------------------------------------
@@ -78,13 +91,16 @@ Route::get('/editarCuota/{cuota}', [ControllerCuotas::class, 'editarCuota'])->na
 Route::put('/editarCuota/{cuota}', [ControllerCuotas::class, 'actualizarCuota'])->name('actualizarCuota');
 
 // TAREA --------------------------------------------------------------------------------------------------------------------
-    
+
 // Insertar
 Route::get('/formularioTarea', ControllerTarea::class)->name('formularioTarea');
 Route::post('formularioTarea', [ControllerTarea::class, 'validacionInsertar']);
 
 // Listar
-Route::get('/listaTareas', [ControllerTarea::class, 'listar'])->name('listaTareas');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/listaTareas', [ControllerTarea::class, 'listar'])->name('listaTareas');
+});
+
 Route::get('/verDetalles/{tarea}', [ControllerTarea::class, 'verDetalles'])->name('verDetalles');
 
 // Borrar

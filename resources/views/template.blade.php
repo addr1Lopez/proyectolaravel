@@ -67,8 +67,17 @@
                 </ul>
             </div>
         </div>
-    </nav>
+        @if (Auth::check())
+            <a href="{{ route('logout') }}" class="btn btn-danger"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Cerrar sesión
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @endif
 
+    </nav>
     <div class="cuerpo">
         @yield('contenido')
     </div>

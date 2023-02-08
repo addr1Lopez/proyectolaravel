@@ -26,17 +26,17 @@
             {!! $errors->first('nombre', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="validationDefault02" class="form-label">Clave:</label>
-            <input type="text" class="form-control" name="clave" placeholder="Clave" id="validationDefault02"
-                value="{{ old('clave') }}">
-            {!! $errors->first('clave', '<span style="color: red;">:message</span>') !!}
+            <label for="validationDefault02" class="form-label">Contraseña:</label>
+            <input type="text" class="form-control" name="password" placeholder="Contraseña" id="validationDefault02"
+                value="{{ old('password') }}">
+            {!! $errors->first('password', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="validationDefaultUsername" class="form-label">Correo:</label>
+            <label for="validationDefaultUsername" class="form-label">Email:</label>
             <div class="input-group">
                 <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                <input type="text" class="form-control" name="correo" placeholder="Correo"
-                    id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" value="{{ old('correo') }}">
+                <input type="text" class="form-control" name="email" placeholder="Email"
+                    id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" value="{{ old('email') }}">
             </div>
             {!! $errors->first('correo', '<span style="color: red;">:message</span>') !!}
         </div>
