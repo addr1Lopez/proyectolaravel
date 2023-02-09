@@ -68,6 +68,16 @@
             </div>
         </div>
         @if (Auth::check())
+            <b>Nombre:</b> 
+            {{ Auth::user()->nombre }}
+            
+            <b>Rol:</b>
+            @if (Auth::user()->tipo === 1)
+                Operario
+            @endif
+            @if (Auth::user()->tipo === 0)
+                Administrador
+            @endif
             <a href="{{ route('logout') }}" class="btn btn-danger"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Cerrar sesión

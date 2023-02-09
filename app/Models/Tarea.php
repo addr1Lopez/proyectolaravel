@@ -13,7 +13,7 @@ class Tarea extends Model
     public $timestamps = false;
     protected $fillable = [
         'id', 'clientes_id', 'persona', 'telefono', 'descripcion', 'correo', 'direccion', 'poblacion',
-        'codigoPostal', 'provincia', 'empleados_id', 'estado', 'fechaCreacion', 'fechaRealizacion', 'anotaciones_anteriores', 'anotaciones_posteriores'];
+        'codigoPostal', 'provincia', 'empleados_id', 'estado', 'fechaCreacion', 'fechaRealizacion', 'anotaciones_anteriores', 'anotaciones_posteriores', 'fichero'];
 
     public function cliente()
     {

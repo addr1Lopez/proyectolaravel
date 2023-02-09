@@ -7,9 +7,9 @@
     <style>
         .botonAtras {
             /* display: grid;
-                            // Establece el div como una cuadrícula
-                            place-items: center;
-                            // Centra el elemento en ambos ejes */
+                                            // Establece el div como una cuadrícula
+                                            place-items: center;
+                                            // Centra el elemento en ambos ejes */
             position: absolute;
             left: 10;
             float: left;
@@ -99,6 +99,14 @@
                 <tr>
                     <td><b>Anotaciones posteriores</b></td>
                     <td>{{ $tarea->anotaciones_posteriores }}</td>
+                </tr>
+                <tr>
+                    <td><b>Fichero</b></td>
+                    <td>
+                        @if ($tarea->fichero)
+                            <a class="btn btn-primary" href="{{ Storage::url('public/files/'.$tarea->fichero) }}"download="{{ basename($tarea->fichero) }}">Descargar</a>
+                        @endif
+                    </td>
                 </tr>
             </tbody>
         </table>

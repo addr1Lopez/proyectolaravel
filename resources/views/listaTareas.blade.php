@@ -65,7 +65,10 @@
                         <td>{{ $tarea->fechaRealizacion }}</td>
                         <td><a class="btn btn-info" href="{{ route('verDetalles', $tarea) }}">🔍</a>
                             <a class="btn btn-warning" href="{{ route('editarTarea', $tarea) }}">✏️</a>
-                            <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}">🗑️</a>
+                            <a class="btn btn-success" href="{{ route('completarTarea', $tarea) }}">✅</a>
+                            {{-- @if (Auth::check() && Auth::user()->tipo === 0) --}}
+                                <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}">🗑️</a>
+                            {{-- @endif --}}
                         </td>
                     </tr>
                 @endforeach

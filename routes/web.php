@@ -44,7 +44,10 @@ Route::get('/formularioEmpleado', ControllerEmpleado::class)->name('formularioEm
 Route::post('formularioEmpleado',  [ControllerEmpleado::class, 'validacionInsertar']);
 
 // Listar
-Route::get('/listaEmpleados', [ControllerEmpleado::class, 'listar'])->name('listaEmpleados');
+Route::middleware(['administrador'])->group(function () {
+    Route::get('/listaEmpleados', [ControllerEmpleado::class, 'listar'])->name('listaEmpleados');
+});
+
 
 // Modificar
 Route::get('/editarEmpleado/{empleado}', [ControllerEmpleado::class, 'editarEmpleado'])->name('editarEmpleado');
@@ -110,3 +113,8 @@ Route::delete('/borrarTarea/{tarea}', [ControllerTarea::class, 'borrarTarea'])->
 // Modificar
 Route::get('/editarTarea/{tarea}', [ControllerTarea::class, 'editar'])->name('editarTarea');
 Route::put('/editarTarea/{tarea}', [ControllerTarea::class, 'actualizar'])->name('actualizar');
+
+// Completar
+// Hay que poner el middleware en mas sitios
+Route::get('/completarTarea/{tarea}', [ControllerTarea::class, 'editarCompletar'])->middleware('comprobarTareaEmpleado')->name('completarTarea');
+Route::put('/completarTarea/{tarea}', [ControllerTarea::class, 'completarTarea'])->name('completarTarea');

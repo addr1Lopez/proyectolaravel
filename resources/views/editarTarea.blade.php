@@ -4,9 +4,9 @@
 
 @section('contenido')
 
-    <form class="row g-3" action="{{ route('actualizar', $tarea) }}" method="POST">
+    <form class="row g-3" action="{{ route('actualizar', $tarea) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <h1> Modificar una tarea / incidencia: </h1>
+        <h1> Modificar tarea {{ $tarea->id }}:</h1>
         @method('PUT')
         <div class="col-md-3">
             <label for="cliente">Cliente:</label>
@@ -118,16 +118,22 @@
         <br>
         <div class="col-md-3">
             <label for="anotaciones_anteriores">Anotaciones anteriores:</label>
-            <textarea class="form-control" id="anotaciones_anteriores" name="anotaciones_anteriores">{{ old('anotaciones_anteriores')??$tarea->anotaciones_anteriores }}
+            <textarea class="form-control" id="anotaciones_anteriores" name="anotaciones_anteriores">{{ old('anotaciones_anteriores') ?? $tarea->anotaciones_anteriores }}
             </textarea>
             {!! $errors->first('anotaciones_anteriores', '<span style="color: red;">:message</span>') !!}
         </div>
         <br>
         <div class="col-md-3">
             <label for="anotaciones_posteriores">Anotaciones posteriores:</label>
-            <textarea class="form-control" id="anotaciones_posteriores" name="anotaciones_posteriores">{{ old('anotaciones_posteriores')??$tarea->anotaciones_posteriores }}
+            <textarea class="form-control" id="anotaciones_posteriores" name="anotaciones_posteriores">{{ old('anotaciones_posteriores') ?? $tarea->anotaciones_posteriores }}
             </textarea>
             {!! $errors->first('anotaciones_posteriores', '<span style="color: red;">:message</span>') !!}
+        </div>
+        <br>
+        <div class="col-md-3">
+            <label for="fichero">Fichero:</label>
+            <input type="file" name="fichero" class="form-control" id="fichero" value="{{ old('fichero') }}">
+            {{-- {!! $errors->first('fichero', '<span style="color: red;">:message</span>') !!} --}}
         </div>
         <br>
         <div class="col-md-3">
