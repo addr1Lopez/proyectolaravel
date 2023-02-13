@@ -37,37 +37,74 @@
             <div class="navbar-collapse collapse show" id="navbarColor02" style="">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Formularios de registro
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('formularioTarea') }}">Insertar una tarea /
-                                incidencia</a>
-                            <a class="dropdown-item" href="{{ route('formularioCliente') }}">Registrar un cliente</a>
-                            <a class="dropdown-item" href="{{ route('formularioEmpleado') }}">Registrar un empleado</a>
-                            <a class="dropdown-item" href="{{ route('formularioRemesa') }}">Formulario Remesa
-                                Mensual</a>
-                            <a class="dropdown-item" href="{{ route('formularioCuota') }}">Formulario Cuota
-                                Excepcional</a>
-                        </div>
+                        @if (Auth::check() && Auth::user()->tipo === 0)
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Formularios de registro
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('formularioTarea') }}">Insertar una tarea /
+                                    incidencia</a>
+                                <a class="dropdown-item" href="{{ route('formularioCliente') }}">Registrar un
+                                    cliente</a>
+                                <a class="dropdown-item" href="{{ route('formularioEmpleado') }}">Registrar un
+                                    empleado</a>
+                                <a class="dropdown-item" href="{{ route('formularioRemesa') }}">Formulario Remesa
+                                    Mensual</a>
+                                <a class="dropdown-item" href="{{ route('formularioCuota') }}">Formulario Cuota
+                                    Excepcional</a>
+                            </div>
                     </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Listados
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('listaTareas') }}">Lista de tareas</a>
-                            <a class="dropdown-item" href="{{ route('listaEmpleados') }}">Lista de empleados</a>
-                            <a class="dropdown-item" href="{{ route('listaClientes') }}">Lista de clientes</a>
-                            <a class="dropdown-item" href="{{ route('listaCuotas') }}"> Lista de cuotas</a>
+                            @if (Auth::check() && Auth::user()->tipo === 1)
+                                <a class="dropdown-item" href="{{ route('listaTareas') }}">Lista de tareas</a>
+                            @endif
+                            @if (Auth::check() && Auth::user()->tipo === 0)
+                                <a class="dropdown-item" href="{{ route('listaTareas') }}">Lista de tareas</a>
+                                <a class="dropdown-item" href="{{ route('listaEmpleados') }}">Lista de empleados</a>
+                                <a class="dropdown-item" href="{{ route('listaClientes') }}">Lista de clientes</a>
+                                <a class="dropdown-item" href="{{ route('listaCuotas') }}"> Lista de cuotas</a>
+                            @endif
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
-        @if (Auth::check())
+
+        <div class="container-navbar">
+            @if (Auth::check())
+                <b>Nombre:</b>
+                {{ Auth::user()->nombre }} 🙎‍♂️
+                <br>
+                <b>Rol:</b>
+                @if (Auth::user()->tipo === 1)
+                    Operario 👨‍🔧
+                @endif
+                @if (Auth::user()->tipo === 0)
+                    Administrador 👨‍💻
+                @endif
+                <br>
+                <b>Fecha:</b>
+                {{ session('hora_login') }}
+
+                <a href="{{ route('logout') }}" class="btn btn-danger"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Cerrar sesión
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endif
+        </div>
+
+
+        {{-- @if (Auth::check())
             <b>Nombre:</b> 
             {{ Auth::user()->nombre }}
             
@@ -85,7 +122,7 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-        @endif
+        @endif --}}
 
     </nav>
     <div class="cuerpo">

@@ -25,7 +25,7 @@ class ControllerTarea extends Controller
     {
         $clientes = Cliente::all();
         $empleados = Empleado::all(); {
-            if (Auth::check() && Auth::user()->es_admin === 1) {
+            if (Auth::check() && Auth::user()->tipo === 0) {
                 $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(10);
             } else {
                 $tareas = Tarea::where('empleados_id', Auth::user()->id)
@@ -104,42 +104,21 @@ class ControllerTarea extends Controller
             'fechaRealizacion' => 'required|after:now',
             'anotaciones_anteriores' => '',
             'anotaciones_posteriores' => '',
-            'fichero' => 'required|file'
+            'fichero' => 'file'
         ]);
 
-        $fichero = request()->file('fichero');
-        $nombre_original = $fichero->getClientOriginalName();
-        $path = $fichero->storeAs('public/files', $nombre_original);
+        if (request()->hasFile('fichero')) {
+            $fichero = request()->file('fichero');
+            $nombre_original = $fichero->getClientOriginalName();
+            $path = $fichero->storeAs('public/files', $nombre_original);
 
-        $validacion['fichero'] = $nombre_original;
+            $validacion['fichero'] = $nombre_original;
+        }
 
         Tarea::where('id', $tarea->id)->update($validacion);
         session()->flash('message', 'Tarea actualizada con éxito');
         return redirect()->route('listaTareas');
     }
 
-    public function editarCompletar(Tarea $tarea)
-    {
-        return view('completarTarea', compact('tarea'));
+    
     }
-
-    public function completarTarea(Tarea $tarea)
-    {
-        $validacion = request()->validate([
-            'estado' => 'required',
-            'anotaciones_anteriores' => '',
-            'anotaciones_posteriores' => '',
-            'fichero' => 'required|file'
-        ]);
-
-        $fichero = request()->file('fichero');
-        $nombre_original = $fichero->getClientOriginalName();
-        $path = $fichero->storeAs('public/files', $nombre_original);
-
-        $validacion['fichero'] = $nombre_original;
-
-        Tarea::where('id', $tarea->id)->update($validacion);
-        session()->flash('message', 'Tarea completada con éxito');
-        return redirect()->route('listaTareas');
-    }
-}

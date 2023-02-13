@@ -4,10 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Tarea;
+
 use Illuminate\Support\Facades\Auth;
 
-class ComprobarTareaEmpleado
+class Operario
 {
     /**
      * Handle an incoming request.
@@ -18,10 +18,11 @@ class ComprobarTareaEmpleado
      */
     public function handle($request, Closure $next)
     {
-        if ($request->route()->parameter('tarea')['empleados_id'] !== Auth::user()->id) {
+        $empleado = Auth::user();
+        if ($empleado->tipo === 0) {
             return redirect()->back();
         }
+
         return $next($request);
     }
 }
-

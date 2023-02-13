@@ -25,7 +25,7 @@
         }
     </style>
     <div class="botonAtras">
-        <a class="btn btn-danger" href="{{ route('listaTareas') }}">🡰 Volver atrás</a>
+        <a class="btn btn-danger" href="{{ route('listarTareasOperario') }}">🡰 Volver atrás</a>
     </div>
     <h1>Detalles de la tarea {{ $tarea->id }} </h1>
     <br>

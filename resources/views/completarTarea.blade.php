@@ -27,7 +27,7 @@
         </div>
         <div class="col-md-3">
             <label for="anotaciones_posteriores" class="form-label">Anotaciones posteriores: </label>
-            <textarea class="form-control" name="anotaciones_posteriores" id="anotaciones_posteriores" cols="30" rows="4">{{ old('anotaciones_anteriores') ?? $tarea->anotaciones_anteriores }}</textarea>
+            <textarea class="form-control" name="anotaciones_posteriores" id="anotaciones_posteriores" cols="30" rows="4">{{ old('anotaciones_posteriores') ?? $tarea->anotaciones_posteriores }}</textarea>
             {!! $errors->first('anotaciones_posteriores', '<b style="color: red">:message</b>') !!}
         </div>
         <br>
@@ -39,7 +39,7 @@
         
         <div class="row-3">
             <button type="submit" class="btn btn-success">✅ Completar</button>
-            <a class="btn btn-danger" href="{{ route('listaTareas') }}">🡰 Volver atrás</a>
+            <a class="btn btn-danger" href="{{ route('listarTareasOperario') }}">🡰 Volver atrás</a>
         </div>
 
     </form>
