@@ -90,7 +90,7 @@
                     Administrador 👨‍💻
                 @endif
                 <br>
-                <b>Fecha:</b>
+                <b>Hora de inicio de sesión:</b>
                 {{ session('hora_login') }}
 
                 <a href="{{ route('logout') }}" class="btn btn-danger"

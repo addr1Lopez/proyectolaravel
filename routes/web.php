@@ -8,7 +8,11 @@ use App\Http\Controllers\ControllerCuotas;
 use App\Http\Controllers\ControllerCliente;
 use App\Http\Controllers\ControllerRemesa;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\FacturaController;
 
+use App\Mail\TevacaeMail;
+
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +40,15 @@ Route::post('/', [SessionController::class, 'login'])->name('login');
 
 // Cerrar sesion
 Route::post('logout', [SessionController::class, 'logout'])->name('logout');
+
+// Email 
+// Route::get('/email', function () {
+//     Mail::to('hola@example.com')->send(new TevacaeMail());
+// })->name('email');
+
+
+// Descargar factura
+Route::get('/generarfactura/{cuota}', FacturaController::class)->name('generarfactura');
 
 // Te obliga a estar logueado para hacer estas funciones
 Route::middleware(['auth'])->group(function () {

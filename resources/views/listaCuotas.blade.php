@@ -39,25 +39,28 @@
             </thead>
             <tbody>
                 @foreach ($cuotas as $cuota)
-                    <tr>
-                        <td>{{ $cuota->id }}</td>
-                        <td>
-                            @if ($cuota->cliente)
-                                {{ $cuota->cliente->cif }}
-                            @else
-                                Cliente dado de baja
-                            @endif
-                        </td>
-                        <td>{{ $cuota->concepto }}</td>
-                        <td>{{ $cuota->fechaEmision }}</td>
-                        <td>{{ $cuota->importe }}</td>
-                        <td>{{ $cuota->fechaPago }}</td>
-                        <td>{{ $cuota->notas }}</td>
-                        <td>{{ $cuota->pagada }}</td>
-                        <td><a class="btn btn-warning" href="{{ route('editarCuota', $cuota) }}">✏️</a>
-                            <a class="btn btn-danger" href="{{ route('confirmBorrarCuota', $cuota) }}">🗑️</a>
-                        </td>
-                    </tr>
+                    @if (!is_null($cuota->cliente) && is_null($cuota->cliente->deleted_at)) 
+                        <tr>
+                            <td>{{ $cuota->id }}</td>
+                            <td>
+                                @if ($cuota->cliente)
+                                    {{ $cuota->cliente->cif }}
+                                @else
+                                    Cliente dado de baja
+                                @endif
+                            </td>
+                            <td>{{ $cuota->concepto }}</td>
+                            <td>{{ $cuota->fechaEmision }}</td>
+                            <td>{{ $cuota->importe }}</td>
+                            <td>{{ $cuota->fechaPago }}</td>
+                            <td>{{ $cuota->notas }}</td>
+                            <td>{{ $cuota->pagada }}</td>
+                            <td><a class="btn btn-warning" href="{{ route('editarCuota', $cuota) }}">✏️</a>
+                                <a class="btn btn-danger" href="{{ route('confirmBorrarCuota', $cuota) }}">🗑️</a>
+                                <a class="btn btn-success" href="{{ route('generarfactura', $cuota->id) }}"> 📋 Factura</a>
+                            </td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>

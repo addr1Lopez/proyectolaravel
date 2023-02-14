@@ -18,8 +18,8 @@ class SessionController extends Controller
         if (Auth::attempt($credentials)) {
 
             $empleado = Empleado::where('email', $request->email)->first();
-            $time = date("h:i:s");
-            $time = date("h:i:s", strtotime($time . "+1 hour"));
+            $time = date("H:i:s");
+            $time = date("H:i:s", strtotime($time . "+1 hour"));
 
             if ($empleado->tipo === 0) {
                  session(['administrador' => $time]);
