@@ -38,8 +38,8 @@
         <br>
         
         <div class="row-3">
-            <button type="submit" class="btn btn-success">✅ Completar</button>
-            <a class="btn btn-danger" href="{{ route('listarTareasOperario') }}">🡰 Volver atrás</a>
+            <button type="submit" class="btn btn-success"><i class="bi bi-folder-plus"></i> Completar</button>
+            <a class="btn btn-danger" href="{{ route('listarTareasOperario') }}"><i class="bi bi-backspace"></i> Volver atrás</a>
         </div>
 
     </form>

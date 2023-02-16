@@ -13,6 +13,7 @@
     <form id="formulario" class="row g-3" method="post" action="{{ route('formularioEmpleado') }}">
         @csrf
         <h1> Formulario de registro de empleados: </h1>
+        <hr>
         <div class="col-md-3">
             <label for="validationDefault01" class="form-label">NIF:</label>
             <input type="text" class="form-control" name="nif" placeholder="NIF" id="validationDefault01"
@@ -70,6 +71,7 @@
 
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Enviar</button>
+            <a class="btn btn-danger" href="{{ route('listaEmpleados') }}"><i class="bi bi-backspace"></i> Volver a empleados</a>
         </div>
     </form>
 @endsection

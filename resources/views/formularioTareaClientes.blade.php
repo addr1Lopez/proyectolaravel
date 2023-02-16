@@ -1,4 +1,4 @@
-@section('titulo', 'Añadir una tarea:')
+@section('titulo', 'Añadir una tarea como cliente')
 
 @extends('template')
 
@@ -10,21 +10,31 @@
         </div>
     @endif
 
-    <form id="formulario" class="row g-3" method="post" action="{{ route('formularioTarea') }}">
-        @csrf
-        <h1> Añadir una tarea / incidencia: </h1>
-        <hr>
-        <div class="col-md-3">
-            <label for="clientes_id" class="form-label">Cliente que encarga el trabajo:</label>
-            <select class="form-select" name="clientes_id">
-                @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->id }}" {{ old('clientes_id') == $cliente->id ? 'selected' : '' }}>
-                        {{ $cliente->nombre }}
-                    </option>
-                @endforeach
-            </select>
-            {!! $errors->first('clientes_id', '<span style=color:red>:message</span>') !!}
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
         </div>
+    @endif
+
+
+    <form id="formulario" class="row g-3" method="post" action="{{ route('formularioTareaClientes') }}">
+        @csrf
+        <h1> Añadir una tarea como Cliente: </h1>
+        <hr>
+        <label for="cliente" class="form-label"><b>Cliente que encarga el trabajo</b></label>
+        <div class="col-md-3">
+            <label for="clienteCif" class="form-label">CIF:</label>
+            <input type="text" class="form-control" name="clienteCif" placeholder="CIF" value="{{ old('clienteCif') }}">
+            {!! $errors->first('clienteCif', '<span style="color: red;">:message</span>') !!}
+        </div>
+        <div class="col-md-3">
+            <label for="telefonoCliente" class="form-label">Teléfono del cliente:</label>
+            <input type="text" class="form-control" name="telefonoCliente" placeholder="Teléfono del cliente"
+                value="{{ old('telefonoCliente') }}">
+            {!! $errors->first('telefonoCliente', '<span style="color: red;">:message</span>') !!}
+        </div>
+        <br>
+        <label for="persona" class="form-label"><b>Persona de contacto:</b></label>
         <div class="col-md-3">
             <label for="persona" class="form-label">Persona de contacto:</label>
             <input type="text" class="form-control" name="persona" placeholder="Nombre, Apellidos"
@@ -37,12 +47,6 @@
             {!! $errors->first('telefono', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="descripcion" class="form-label">Descripción:</label>
-            <input type="text" class="form-control" name="descripcion" placeholder="Descripción"
-                value="{{ old('descripcion') }}">
-            {!! $errors->first('descripcion', '<span style="color: red;">:message</span>') !!}
-        </div>
-        <div class="col-md-3">
             <label for="validationDefaultUsername" class="form-label">Correo electrónico:</label>
             <div class="input-group">
                 <span class="input-group-text" id="inputGroupPrepend2">@</span>
@@ -50,6 +54,13 @@
                     aria-describedby="inputGroupPrepend2" value="{{ old('correo') }}">
             </div>
             {!! $errors->first('correo', '<span style="color: red;">:message</span>') !!}
+        </div>
+        <label for="tarea" class="form-label"><b>Formulario de la tarea</b></label>
+        <div class="col-md-3">
+            <label for="descripcion" class="form-label">Descripción:</label>
+            <input type="text" class="form-control" name="descripcion" placeholder="Descripción"
+                value="{{ old('descripcion') }}">
+            {!! $errors->first('descripcion', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
             <label for="direccion" class="form-label">Dirección:</label>
@@ -82,29 +93,6 @@
             {!! $errors->first('provincia', '<span style="color: red;">:message</span>') !!}
         </div>
         <div class="col-md-3">
-            <label for="operario" class="form-label">Operario encargado</label>
-            <select class="form-select" name="empleados_id">
-                @foreach ($empleados as $empleado)
-                    @if ($empleado->tipo == 1)
-                        <option value="{{ $empleado->id }}"
-                            {{ old('empleados_id') == $empleado->id ? 'selected' : '' }}>{{ $empleado->nombre }}
-                        </option>
-                    @endif
-                @endforeach
-            </select>
-            {!! $errors->first('empleados_id', '<span style=color:red>:message</span>') !!}
-        </div>
-        <div class="col-md-3">
-            <label for="estado" class="form-label">Estado:</label>
-            <select class="form-select" name="estado" id="estado">
-                <option value="P">P - Pendiente</option>
-                <option value="R">R - Realizada</option>
-                <option value="C">C - Cancelada</option>
-            </select>
-            {!! $errors->first('estado', '<span style="color: red;">:message</span>') !!}
-        </div>
-
-        <div class="col-md-3">
             <label for="fechaRealizacion" class="form-label">Fecha de realización:</label>
             <input type="date" class="form-control" name="fechaRealizacion" placeholder="Fecha de realización"
                 value="{{ old('fechaRealizacion') }}">
@@ -116,7 +104,8 @@
 
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Enviar</button>
-            <a class="btn btn-danger" href="{{ route('listaTareas') }}"><i class="bi bi-backspace"></i> Volver a tareas</a>
+            <a class="btn btn-danger" href="{{ route('login') }}">
+                <i class="bi bi-backspace"></i> Volver al login</a>
         </div>
     </form>
 @endsection

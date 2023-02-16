@@ -19,7 +19,7 @@
 
     <form action="{{ route('formularioCuota') }}" method="post" class="row g-3" id="formulario">
         <h1> Formulario Cuota Excepcional </h1>
-
+        <hr>
         @csrf
         <div class="col-md-3">
             <label class="form-label">Cliente: </label>
@@ -32,7 +32,7 @@
             </select>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <label for="concepto" class="form-label">Concepto:</label>
             <input class="form-control" type="text" name="concepto" value="{{ old('concepto') }}" placeholder="Concepto">
             {!! $errors->first('concepto', '<b style="color: red">:message</b>') !!}
@@ -58,6 +58,7 @@
 
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Enviar</button>
+            <a class="btn btn-danger" href="{{ route('listaCuotas') }}"><i class="bi bi-backspace"></i> Volver a cuotas</a>
         </div>
 
     </form>

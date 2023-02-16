@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/94d5779c24.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>@yield('titulo')</title>
 
     @yield('linkScript')
@@ -26,8 +27,7 @@
 </style>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning" style="font-weight: bold;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info" style="font-weight: bold;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Tevacae S.L</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
@@ -36,100 +36,76 @@
             </button>
             <div class="navbar-collapse collapse show" id="navbarColor02" style="">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        @if (Auth::check() && Auth::user()->tipo === 0)
+                    @if (Auth::check() && Auth::user()->tipo === 0)
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Formularios de registro
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('formularioTarea') }}">Insertar una tarea /
-                                    incidencia</a>
-                                <a class="dropdown-item" href="{{ route('formularioCliente') }}">Registrar un
-                                    cliente</a>
-                                <a class="dropdown-item" href="{{ route('formularioEmpleado') }}">Registrar un
-                                    empleado</a>
-                                <a class="dropdown-item" href="{{ route('formularioRemesa') }}">Formulario Remesa
-                                    Mensual</a>
-                                <a class="dropdown-item" href="{{ route('formularioCuota') }}">Formulario Cuota
-                                    Excepcional</a>
+                                <a class="dropdown-item" href="{{ route('formularioTarea') }}">Insertar una tarea / incidencia</a>
+                                <a class="dropdown-item" href="{{ route('formularioCliente') }}">Registrar un cliente</a>
+                                <a class="dropdown-item" href="{{ route('formularioEmpleado') }}">Registrar un empleado</a>
+                                <a class="dropdown-item" href="{{ route('formularioRemesa') }}">Formulario Remesa Mensual</a>
+                                <a class="dropdown-item" href="{{ route('formularioCuota') }}">Formulario Cuota Excepcional</a>
                             </div>
-                    </li>
+                        </li>
                     @endif
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Listados
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @if (Auth::check() && Auth::user()->tipo === 1)
-                                <a class="dropdown-item" href="{{ route('listaTareas') }}">Lista de tareas</a>
-                            @endif
-                            @if (Auth::check() && Auth::user()->tipo === 0)
+                    @if (Auth::check() && Auth::user()->tipo === 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('listaTareas') }}">Lista de tareas</a>
+                        </li>
+                    @endif
+                    @if (Auth::check() && Auth::user()->tipo === 0)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Listados
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('listaTareas') }}">Lista de tareas</a>
                                 <a class="dropdown-item" href="{{ route('listaEmpleados') }}">Lista de empleados</a>
                                 <a class="dropdown-item" href="{{ route('listaClientes') }}">Lista de clientes</a>
                                 <a class="dropdown-item" href="{{ route('listaCuotas') }}"> Lista de cuotas</a>
-                            @endif
-                        </div>
-                    </li>
+                            </div>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
 
-        <div class="container-navbar">
+        <div>
             @if (Auth::check())
-                <b>Nombre:</b>
-                {{ Auth::user()->nombre }} 🙎‍♂️
-                <br>
-                <b>Rol:</b>
-                @if (Auth::user()->tipo === 1)
-                    Operario 👨‍🔧
-                @endif
-                @if (Auth::user()->tipo === 0)
-                    Administrador 👨‍💻
-                @endif
-                <br>
-                <b>Hora de inicio de sesión:</b>
-                {{ session('hora_login') }}
+                <p style="margin-left: 10%;">
+                    <b>Nombre:</b>
+                    {{ Auth::user()->nombre }} |
+                    <b>Rol:</b>
+                    @if (Auth::user()->tipo === 1)
+                        Operario <i class="bi bi-person-video"></i>
+                    @endif
+                    @if (Auth::user()->tipo === 0)
+                        Administrador <i class="bi bi-person-vcard-fill"></i>
+                    @endif
+                    <b>Sesión:</b>
+                    {{ session('hora_login') }} 🕓
+                    <a href="{{ route('logout') }}" class="btn btn-danger"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="bi bi-box-arrow-left"></i>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </a>
+                </p>
 
-                <a href="{{ route('logout') }}" class="btn btn-danger"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Cerrar sesión
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
             @endif
         </div>
-
-
-        {{-- @if (Auth::check())
-            <b>Nombre:</b> 
-            {{ Auth::user()->nombre }}
-            
-            <b>Rol:</b>
-            @if (Auth::user()->tipo === 1)
-                Operario
-            @endif
-            @if (Auth::user()->tipo === 0)
-                Administrador
-            @endif
-            <a href="{{ route('logout') }}" class="btn btn-danger"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                Cerrar sesión
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        @endif --}}
 
     </nav>
     <div class="cuerpo">
         @yield('contenido')
     </div>
 
-    <footer class="bg-warning text-center text-white">
+    <footer class="bg-info text-center text-white">
         <!-- Grid container -->
         <div class="container p-4 pb-0">
             <!-- Section: Social media -->

@@ -68,8 +68,8 @@
         </div>
 
         <div class="row-3">
-            <button type="submit" class="btn btn-success">✏️ Actualizar</button>
-            <a class="btn btn-danger" href="{{ route('listaEmpleados') }}">🡰 Volver atrás</a>
+            <button type="submit" class="btn btn-success"><i class="bi bi-pencil"></i> Actualizar</button>
+            <a class="btn btn-danger" href="{{ route('listaEmpleados') }}"><i class="bi bi-backspace"></i> Volver atrás</a>
         </div>
 
     </form>

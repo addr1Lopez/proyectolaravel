@@ -66,9 +66,9 @@
         </div>
 
         <div class="col-12">
-            <button type="submit" class="btn btn-success">✏️ Actualizar</button>
-            <a class="btn btn-danger" href="{{ route('listaCuotas', 'fechaEmision') }}">
-                🡰 Volver atrás</a>
+            <button type="submit" class="btn btn-success"><i class="bi bi-pencil"></i> Actualizar</button>
+            <a class="btn btn-secondary" href="{{ route('listaCuotas', 'fechaEmision') }}">
+                <i class="bi bi-backspace"></i> Volver atrás</a>
         </div>
     </form>
 

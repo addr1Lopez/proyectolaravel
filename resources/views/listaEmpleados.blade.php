@@ -17,6 +17,7 @@
 @section('contenido')
     
     <h1>Lista de empleados</h1>
+    <hr>
     <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
@@ -42,8 +43,8 @@
                         <td>{{ $empleado->direccion }}</td>
                         <td>{{ $empleado->fechaAlta }}</td>
                         <td>{{ $empleado->tipo }}</td>
-                        <td><a class="btn btn-warning" href="{{ route('editarEmpleado', $empleado) }}">✏️</a>
-                            <a class="btn btn-danger" href=" {{ route('confirmBorrarEmpleado', $empleado) }}">🗑️</a>
+                        <td><a class="btn btn-warning" href="{{ route('editarEmpleado', $empleado) }}"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-danger" href=" {{ route('confirmBorrarEmpleado', $empleado) }}"><i class="bi bi-trash3-fill"></i></a>
                         </td>
 
                     </tr>

@@ -6,7 +6,7 @@
 
     <form action="{{ route('formularioRemesa') }}" method="post" class="row g-3" id="formulario">
         <h1> Remesa Mensual </h1>
-
+        <hr>
         @csrf
         <div class="col-md-3">
             <label for="concepto" class="form-label">Concepto:</label>
@@ -28,6 +28,7 @@
 
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Enviar</button>
+            <a class="btn btn-danger" href="{{ route('listaCuotas') }}"><i class="bi bi-backspace"></i> Volver a cuotas</a>
         </div>
 
     </form>

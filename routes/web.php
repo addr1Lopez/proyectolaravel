@@ -7,12 +7,10 @@ use App\Http\Controllers\ControllerEmpleado;
 use App\Http\Controllers\ControllerCuotas;
 use App\Http\Controllers\ControllerCliente;
 use App\Http\Controllers\ControllerRemesa;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\FacturaController;
 
-use App\Mail\TevacaeMail;
-
-use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +28,6 @@ use Illuminate\Support\Facades\Mail;
 // });
 
 // LOGIN
-
 Route::get('/', function () {
     return view('login');
 });
@@ -50,13 +47,23 @@ Route::post('logout', [SessionController::class, 'logout'])->name('logout');
 // Descargar factura
 Route::get('/generarfactura/{cuota}', FacturaController::class)->name('generarfactura');
 
+Route::get('/email', [EmailController::class, 'store'])->name('email');
+
+// Insertar tarea como cliente
+Route::get('/formularioTareaClientes', [ControllerTarea::class, 'formularioTareaClientes'])->name('formularioTareaClientes');
+Route::post('formularioTareaClientes', [ControllerTarea::class, 'validacionClienteInsertar']);
+
+// Recuperacion de contraseña
+Route::get('/formularioPass', [EmailController::class, 'formularioPass'])->name('formularioPass');
+Route::post('formularioPass', [EmailController::class, 'validacionCorreo']);
+
 // Te obliga a estar logueado para hacer estas funciones
 Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['administrador'])->group(function () {
 
-    // EMPLEADO --------------------------------------------------------------------------------------------------------------------
-    
+        // EMPLEADO --------------------------------------------------------------------------------------------------------------------
+
         // Insertar
         Route::get('/formularioEmpleado', ControllerEmpleado::class)->name('formularioEmpleado');
         Route::post('formularioEmpleado',  [ControllerEmpleado::class, 'validacionInsertar']);
@@ -72,9 +79,9 @@ Route::middleware(['auth'])->group(function () {
         // Borrar
         Route::get('/confirmBorrarEmpleado/{empleado}', [ControllerEmpleado::class, 'confirmacionBorrar'])->name('confirmBorrarEmpleado');
         Route::delete('/borrarEmpleado/{empleado}', [ControllerEmpleado::class, 'borrarEmpleado'])->name('borrarEmpleado');
-    
 
-    // CLIENTE ---------------------------------------------------------------------------------------------------------------------
+
+        // CLIENTE ---------------------------------------------------------------------------------------------------------------------
 
         // Insertar
         Route::get('/formularioCliente', ControllerCliente::class)->name('formularioCliente');
@@ -88,7 +95,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/borrarCliente/{cliente}', [ControllerCliente::class, 'borrarCliente'])->name('borrarCliente');
 
 
-    // MANTENIMIENTO --------------------------------------------------------------------------------------------------------------------
+        // MANTENIMIENTO --------------------------------------------------------------------------------------------------------------------
 
         // Insertar
         Route::get('/formMantenimiento', ControllerCuotas::class, 'formMantenimiento')->name('formMantenimiento');
@@ -111,10 +118,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/editarCuota/{cuota}', [ControllerCuotas::class, 'editarCuota'])->name('editarCuota');
         Route::put('/editarCuota/{cuota}', [ControllerCuotas::class, 'actualizarCuota'])->name('actualizarCuota');
 
-    // TAREA --------------------------------------------------------------------------------------------------------------------
+        // TAREA --------------------------------------------------------------------------------------------------------------------
 
         // Insertar
-        Route::get('/formularioTarea', ControllerTarea::class)->name('formularioTarea');
+        Route::get('/formularioTarea', [ControllerTarea::class, 'formularioInsertar'])->name('formularioTarea');
         Route::post('formularioTarea', [ControllerTarea::class, 'validacionInsertar']);
 
         // Listar
@@ -130,9 +137,8 @@ Route::middleware(['auth'])->group(function () {
 
         // Detalles de la tarea siendo administrador
         Route::get('/verDetalles/{tarea}', [ControllerTarea::class, 'verDetalles'])->name('verDetalles');
-    
     }); // cierre del middleware de administrador
-    
+
 
     Route::middleware(['operario'])->group(function () {
         // Completar

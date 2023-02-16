@@ -21,6 +21,7 @@
         </div>
     @endif
     <h1>Lista de tareas</h1>
+    <hr>
     <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
@@ -65,13 +66,13 @@
                         <td>{{ $tarea->fechaRealizacion }}</td>
                         <td>
                             @if (Auth::check() && Auth::user()->tipo === 1)
-                                <a class="btn btn-info" href="{{ route('verDetallesOperario', $tarea) }}">🔍</a>    
-                                <a class="btn btn-success" href="{{ route('completarTarea', $tarea) }}">✅</a>
+                                <a class="btn btn-primary" href="{{ route('verDetallesOperario', $tarea) }}"><i class="bi bi-search"></i></a>    
+                                <a class="btn btn-success" href="{{ route('completarTarea', $tarea) }}"><i class="bi bi-folder-plus"></i></a>
                             @endif
                             @if (Auth::check() && Auth::user()->tipo === 0)
-                            <a class="btn btn-info" href="{{ route('verDetalles', $tarea) }}">🔍</a>
-                                <a class="btn btn-warning" href="{{ route('editarTarea', $tarea) }}">✏️</a>
-                                <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}">🗑️</a>
+                            <a class="btn btn-primary" href="{{ route('verDetalles', $tarea) }}"><i class="bi bi-search"></i></a>
+                                <a class="btn btn-warning" href="{{ route('editarTarea', $tarea) }}"><i class="bi bi-pencil"></i></a>
+                                <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}"><i class="bi bi-trash3-fill"></i></a>
                         </td>
                 @endif
                 </tr>

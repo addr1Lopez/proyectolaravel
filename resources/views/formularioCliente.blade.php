@@ -13,6 +13,7 @@
     <form id="formulario" class="row g-3" method="post" action="{{ route('formularioCliente') }}">
         @csrf
         <h1> Formulario de registro de cliente: </h1>
+        <hr>
         <div class="col-md-3">
             <label for="validationDefault01" class="form-label">CIF:</label>
             <input type="text" class="form-control" name="cif" placeholder="CIF" value="{{ old('cif') }}">
@@ -83,6 +84,7 @@
 
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Enviar</button>
+            <a class="btn btn-danger" href="{{ route('listaClientes') }}"><i class="bi bi-backspace"></i> Volver a clientes</a>
         </div>
     </form>
 @endsection

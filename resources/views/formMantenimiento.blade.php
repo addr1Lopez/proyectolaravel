@@ -7,6 +7,7 @@
     <form id="formulario" class="row g-3" method="post" action="{{ route('formMantenimiento') }}">
         @csrf
         <h1> Formulario de cuotas: </h1>
+        <hr>
         <div class="col-md-3">
             <label for="clientes_id" class="form-label">Cliente:</label>
             <select class="form-select" name="clientes_id">

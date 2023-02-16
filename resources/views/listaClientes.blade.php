@@ -21,6 +21,7 @@
         </div>
     @endif
     <h1>Lista de clientes</h1>
+    <hr>
     <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
@@ -49,7 +50,7 @@
                         <td>{{ $cliente->pais->nombre }}</td>
                         <td>{{ $cliente->moneda }}</td>
                         <td>
-                            <a class="btn btn-danger" href=" {{ route('confirmBorrarCliente', $cliente) }}">🗑️</a>
+                            <a class="btn btn-danger" href=" {{ route('confirmBorrarCliente', $cliente) }}"><i class="bi bi-trash3-fill"></i></a>
                         </td>
 
                     </tr>

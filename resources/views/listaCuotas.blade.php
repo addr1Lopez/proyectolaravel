@@ -21,6 +21,7 @@
         </div>
     @endif
     <h1>Lista de cuotas</h1>
+    <hr>
     <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
@@ -55,9 +56,9 @@
                             <td>{{ $cuota->fechaPago }}</td>
                             <td>{{ $cuota->notas }}</td>
                             <td>{{ $cuota->pagada }}</td>
-                            <td><a class="btn btn-warning" href="{{ route('editarCuota', $cuota) }}">✏️</a>
-                                <a class="btn btn-danger" href="{{ route('confirmBorrarCuota', $cuota) }}">🗑️</a>
-                                <a class="btn btn-success" href="{{ route('generarfactura', $cuota->id) }}"> 📋 Factura</a>
+                            <td><a class="btn btn-warning" href="{{ route('editarCuota', $cuota) }}"><i class="bi bi-pencil"></i></a>
+                                <a class="btn btn-danger" href="{{ route('confirmBorrarCuota', $cuota) }}"><i class="bi bi-trash3-fill"></i></a>
+                                <a class="btn btn-success" href="{{ route('generarfactura', $cuota->id) }}"><i class="bi bi-filetype-pdf"></i></a>
                             </td>
                         </tr>
                     @endif

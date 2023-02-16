@@ -24,9 +24,19 @@
             text-align: center;
         }
     </style>
+    
+    @if (Auth::check() && Auth::user()->tipo === 1)
     <div class="botonAtras">
-        <a class="btn btn-danger" href="{{ route('listarTareasOperario') }}">🡰 Volver atrás</a>
+        <a class="btn btn-danger" href="{{ route('listarTareasOperario') }}"><i class="bi bi-backspace"></i> Volver atrás</a>
     </div>
+    @endif
+
+    @if (Auth::check() && Auth::user()->tipo === 0)
+    <div class="botonAtras">
+        <a class="btn btn-danger" href="{{ route('listaTareas') }}"><i class="bi bi-backspace"></i> Volver atrás</a>
+    </div>
+    @endif
+
     <h1>Detalles de la tarea {{ $tarea->id }} </h1>
     <br>
     <div id="cuerpo">

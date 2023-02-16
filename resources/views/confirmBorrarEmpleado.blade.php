@@ -42,8 +42,8 @@
             <form action="{{ route('borrarEmpleado', $empleado) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">🗑️ Borrar</button>
-                <a class="btn btn-info" href="{{ route('listaEmpleados') }}">🡰 Volver atrás</a>
+                <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Borrar</button>
+                <a class="btn btn-secondary" href="{{ route('listaEmpleados') }}"><i class="bi bi-backspace"></i> Volver atrás</a>
             </form>
         </div>
     </div>
