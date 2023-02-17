@@ -77,4 +77,24 @@ class ControllerEmpleado extends Controller
         session()->flash('message', 'Empleado modificado con éxito');
         return redirect()->route('listaEmpleados');
     }
+
+    public function editarCuenta(Empleado $empleado)
+    {
+        return view('miCuenta', compact('empleado'));
+    }
+
+    public function actualizarCuenta(Empleado $empleado)
+    {
+        $validacion = request()->validate([
+            'email' => 'required|email',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+            'direccion' => 'required',
+            'fechaAlta' => 'required|after:now',         
+        ]);
+        
+        Empleado::where('id', $empleado->id)->update($validacion);
+        session()->flash('message', 'Cuenta actualizada con éxito');
+        return redirect()->route('editarCuenta', $empleado);
+    }
+
 }

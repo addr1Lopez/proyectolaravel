@@ -29,7 +29,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-info" style="font-weight: bold;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Tevacae S.L</a>
+            <a class="navbar-brand" href="#">Tevacae S.L <i class="bi bi-buildings-fill"></i></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                 aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,14 +40,19 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Formularios de registro
+                                Registros
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('formularioTarea') }}">Insertar una tarea / incidencia</a>
-                                <a class="dropdown-item" href="{{ route('formularioCliente') }}">Registrar un cliente</a>
-                                <a class="dropdown-item" href="{{ route('formularioEmpleado') }}">Registrar un empleado</a>
-                                <a class="dropdown-item" href="{{ route('formularioRemesa') }}">Formulario Remesa Mensual</a>
-                                <a class="dropdown-item" href="{{ route('formularioCuota') }}">Formulario Cuota Excepcional</a>
+                                <a class="dropdown-item" href="{{ route('formularioTarea') }}">Insertar una tarea /
+                                    incidencia</a>
+                                <a class="dropdown-item" href="{{ route('formularioCliente') }}">Registrar un
+                                    cliente</a>
+                                <a class="dropdown-item" href="{{ route('formularioEmpleado') }}">Registrar un
+                                    empleado</a>
+                                <a class="dropdown-item" href="{{ route('formularioRemesa') }}">Formulario Remesa
+                                    Mensual</a>
+                                <a class="dropdown-item" href="{{ route('formularioCuota') }}">Formulario Cuota
+                                    Excepcional</a>
                             </div>
                         </li>
                     @endif
@@ -66,7 +71,8 @@
                                 <a class="dropdown-item" href="{{ route('listaTareas') }}">Lista de tareas</a>
                                 <a class="dropdown-item" href="{{ route('listaEmpleados') }}">Lista de empleados</a>
                                 <a class="dropdown-item" href="{{ route('listaClientes') }}">Lista de clientes</a>
-                                <a class="dropdown-item" href="{{ route('listaCuotas') }}"> Lista de cuotas</a>
+                                <a class="dropdown-item" href="{{ route('listaCuotas', 'fechaEmision') }}"> Lista de
+                                    cuotas</a>
                             </div>
                         </li>
                     @endif
@@ -78,13 +84,13 @@
             @if (Auth::check())
                 <p style="margin-left: 10%;">
                     <b>Nombre:</b>
-                    {{ Auth::user()->nombre }} |
+                    <a style="text-decoration:none; color:inherit" href="{{ route('editarCuenta', Auth::user()->id) }}">{{ Auth::user()->nombre }}</a> |
                     <b>Rol:</b>
                     @if (Auth::user()->tipo === 1)
-                        Operario <i class="bi bi-person-video"></i>
+                        Operario</i> |
                     @endif
                     @if (Auth::user()->tipo === 0)
-                        Administrador <i class="bi bi-person-vcard-fill"></i>
+                        Administrador |
                     @endif
                     <b>Sesión:</b>
                     {{ session('hora_login') }} 🕓

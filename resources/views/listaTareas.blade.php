@@ -25,7 +25,7 @@
     <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
-            <thead class="table-warning">
+            <thead class="table-info">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Cliente</th>
@@ -43,13 +43,7 @@
                 @foreach ($tareas as $tarea)
                     <tr>
                         <td>{{ $tarea->id }}</td>
-                        <td>
-                            @if ($tarea->cliente)
-                                {{ $tarea->cliente->cif }}
-                            @else
-                                Cliente dado de baja
-                            @endif
-                        </td>
+                        <td>{{ $tarea->cliente->cif }}</td>
                         <td>{{ $tarea->persona }}</td>
                         <td>{{ $tarea->descripcion }}</td>
                         <td>{{ $tarea->direccion }}</td>
@@ -59,20 +53,25 @@
                             @if ($tarea->empleado)
                                 {{ $tarea->empleado->nif }}
                             @else
-                                Empleado dado de baja
+                                Empleado no asignado
                             @endif
                         </td>
                         <td>{{ $tarea->estado }}</td>
                         <td>{{ $tarea->fechaRealizacion }}</td>
                         <td>
                             @if (Auth::check() && Auth::user()->tipo === 1)
-                                <a class="btn btn-primary" href="{{ route('verDetallesOperario', $tarea) }}"><i class="bi bi-search"></i></a>    
-                                <a class="btn btn-success" href="{{ route('completarTarea', $tarea) }}"><i class="bi bi-folder-plus"></i></a>
+                                <a class="btn btn-primary" href="{{ route('verDetallesOperario', $tarea) }}"><i
+                                        class="bi bi-search"></i></a>
+                                <a class="btn btn-success" href="{{ route('completarTarea', $tarea) }}"><i
+                                        class="bi bi-folder-plus"></i></a>
                             @endif
                             @if (Auth::check() && Auth::user()->tipo === 0)
-                            <a class="btn btn-primary" href="{{ route('verDetalles', $tarea) }}"><i class="bi bi-search"></i></a>
-                                <a class="btn btn-warning" href="{{ route('editarTarea', $tarea) }}"><i class="bi bi-pencil"></i></a>
-                                <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}"><i class="bi bi-trash3-fill"></i></a>
+                                <a class="btn btn-primary" href="{{ route('verDetalles', $tarea) }}"><i
+                                        class="bi bi-search"></i></a>
+                                <a class="btn btn-warning" href="{{ route('editarTarea', $tarea) }}"><i
+                                        class="bi bi-pencil"></i></a>
+                                <a class="btn btn-danger" href="{{ route('confirmBorrarTarea', $tarea) }}"><i
+                                        class="bi bi-trash3-fill"></i></a>
                         </td>
                 @endif
                 </tr>

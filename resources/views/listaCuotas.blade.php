@@ -23,9 +23,20 @@
     <h1>Lista de cuotas</h1>
     <hr>
     <br>
+
+    <div class="d-flex flex-column align-items-center w-50 mx-auto">
+        <h3 class="text-center">Filtros:</h3>
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-outline-primary" href="{{ route('listaCuotas', ['fechaEmision']) }}">Fecha de Emisión</a>&nbsp;
+            <a class="btn btn-outline-primary" href="{{ route('listaCuotas', ['fechaPago']) }}">Fecha de Pago</a>&nbsp;
+            <a class="btn btn-outline-primary" href="{{ route('listaCuotas', ['SI']) }}">Pagadas</a>&nbsp;
+            <a class="btn btn-outline-primary" href="{{ route('listaCuotas', ['NO']) }}">No pagadas</a>&nbsp;
+        </div>
+    </div>
+    <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
-            <thead class="table-warning">
+            <thead class="table-info">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Cliente</th>
@@ -40,25 +51,22 @@
             </thead>
             <tbody>
                 @foreach ($cuotas as $cuota)
-                    @if (!is_null($cuota->cliente) && is_null($cuota->cliente->deleted_at)) 
+                    @if (!is_null($cuota->cliente) && is_null($cuota->cliente->deleted_at))
                         <tr>
                             <td>{{ $cuota->id }}</td>
-                            <td>
-                                @if ($cuota->cliente)
-                                    {{ $cuota->cliente->cif }}
-                                @else
-                                    Cliente dado de baja
-                                @endif
-                            </td>
+                            <td>{{ $cuota->cliente->cif }}</td>
                             <td>{{ $cuota->concepto }}</td>
                             <td>{{ $cuota->fechaEmision }}</td>
                             <td>{{ $cuota->importe }}</td>
                             <td>{{ $cuota->fechaPago }}</td>
                             <td>{{ $cuota->notas }}</td>
                             <td>{{ $cuota->pagada }}</td>
-                            <td><a class="btn btn-warning" href="{{ route('editarCuota', $cuota) }}"><i class="bi bi-pencil"></i></a>
-                                <a class="btn btn-danger" href="{{ route('confirmBorrarCuota', $cuota) }}"><i class="bi bi-trash3-fill"></i></a>
-                                <a class="btn btn-success" href="{{ route('generarfactura', $cuota->id) }}"><i class="bi bi-filetype-pdf"></i></a>
+                            <td><a class="btn btn-warning" href="{{ route('editarCuota', $cuota) }}"><i
+                                        class="bi bi-pencil"></i></a>
+                                <a class="btn btn-danger" href="{{ route('confirmBorrarCuota', $cuota) }}"><i
+                                        class="bi bi-trash3-fill"></i></a>
+                                <a class="btn btn-success" href="{{ route('generarfactura', $cuota->id) }}"><i
+                                        class="bi bi-filetype-pdf"></i></a>
                             </td>
                         </tr>
                     @endif

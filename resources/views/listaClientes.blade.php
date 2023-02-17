@@ -25,7 +25,7 @@
     <br>
     <div id="cuerpo">
         <table class="table table-striped table-hover">
-            <thead class="table-warning">
+            <thead class="table-info">
                 <tr>
                     <th scope="col">CIF</th>
                     <th scope="col">Nombre</th>

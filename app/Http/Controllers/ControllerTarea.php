@@ -25,13 +25,12 @@ class ControllerTarea extends Controller
     {
         $clientes = Cliente::all();
         $empleados = Empleado::all(); {
-            if (Auth::check() && Auth::user()->tipo === 0) {
-                $tareas = Tarea::orderBy('fechaRealizacion', 'desc')->paginate(10);
-            } else {
-                $tareas = Tarea::where('empleados_id', Auth::user()->id)
-                    ->orderBy('fechaRealizacion', 'desc')
-                    ->paginate(5);
-            }
+        $tareas = Tarea::whereHas('cliente', function ($query) {
+                $query->whereNull('clientes.deleted_at');
+            })
+                ->orderBy('fechaRealizacion', 'desc')
+                ->paginate(10);
+
             return view('listaTareas', compact('tareas', 'clientes', 'empleados'));
         }
     }
@@ -160,9 +159,9 @@ class ControllerTarea extends Controller
             Tarea::create($datos);
             session()->flash('message', 'La tarea se ha registrado correctamente.');
             return redirect()->route('formularioTareaClientes');
-        } 
-            session()->flash('error', 'La tarea no se ha podido registrar.');
-            return redirect()->route('formularioTareaClientes');
+        }
+        session()->flash('error', 'La tarea no se ha podido registrar.');
+        return redirect()->route('formularioTareaClientes');
     }
 
     public function formularioTareaClientes(Request $request)

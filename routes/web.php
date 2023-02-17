@@ -60,6 +60,10 @@ Route::post('formularioPass', [EmailController::class, 'validacionCorreo']);
 // Te obliga a estar logueado para hacer estas funciones
 Route::middleware(['auth'])->group(function () {
 
+    // Mi cuenta
+    Route::get('/miCuenta/{empleado}', [ControllerEmpleado::class, 'editarCuenta'])->middleware('comprobarCuentaUsuario')->name('editarCuenta');
+    Route::put('/miCuenta/{empleado}', [ControllerEmpleado::class, 'actualizarCuenta'])->name('actualizarCuenta');
+
     Route::middleware(['administrador'])->group(function () {
 
         // EMPLEADO --------------------------------------------------------------------------------------------------------------------
@@ -71,10 +75,9 @@ Route::middleware(['auth'])->group(function () {
         // Listar
         Route::get('/listaEmpleados', [ControllerEmpleado::class, 'listar'])->name('listaEmpleados');
 
-
         // Modificar
         Route::get('/editarEmpleado/{empleado}', [ControllerEmpleado::class, 'editarEmpleado'])->name('editarEmpleado');
-        Route::put('/editarEmpleado/{empleado}', [ControllerEmpleado::class, 'actualizarEmpleado'])->name('actualizarEmpleado');
+        Route::put('/editarEmpleado/{empleado}', [ControllerEmpleado::class, 'actualizarEmpleado'])->name('actualizarEmpleado');      
 
         // Borrar
         Route::get('/confirmBorrarEmpleado/{empleado}', [ControllerEmpleado::class, 'confirmacionBorrar'])->name('confirmBorrarEmpleado');
@@ -108,7 +111,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('formularioCuota', [ControllerCuotas::class, 'validarCuotaExcepcional']);
 
         // Listar
-        Route::get('/listaCuotas', [ControllerCuotas::class, 'listar'])->name('listaCuotas');
+        Route::get('/listaCuotas/{filtro}', [ControllerCuotas::class, 'listar'])->name('listaCuotas');
 
         // Borrar
         Route::get('/confirmBorrarCuota/{cuota}', [ControllerCuotas::class, 'confirmacionBorrar'])->name('confirmBorrarCuota');

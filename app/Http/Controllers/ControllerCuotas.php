@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cuota;
 use App\Models\Cliente;
+use App\Models\Tarea;
 
 class ControllerCuotas extends Controller
 {
@@ -14,13 +15,46 @@ class ControllerCuotas extends Controller
         return view('formularioCuota', compact('clientes'));
     }
 
-    public function listar()
+    public function listar($filtro = "")
     {
-        $clientes = Cliente::all();
-        $cuotas = Cuota::orderBy('fechaEmision', 'desc')->paginate(3);
-        return view('listaCuotas', compact('cuotas', 'clientes'));
+        // $clientes = Cliente::all();
+        // $cuotas = Cuota::orderBy('fechaEmision', 'desc')->paginate(3);
+        // return view('listaCuotas', compact('cuotas', 'clientes'));
+        $tareas = Tarea::all();
+        switch ($filtro) {
+            case "NO":
+                $cuotas = Cuota::where('pagada', 'NO')
+                    ->whereHas('cliente', function ($query) {
+                        $query->whereNull('deleted_at');
+                    })
+                    ->orderBy('fechaEmision', 'asc')
+                    ->paginate(5);
+                break;
+            case "SI":
+                $cuotas = Cuota::where('pagada', 'SI')
+                    ->whereHas('cliente', function ($query) {
+                        $query->whereNull('deleted_at');
+                    })
+                    ->orderBy('fechaEmision', 'asc')
+                    ->paginate(5);
+                break;
+            case "fechaPago":
+                $cuotas = Cuota::orderBy('fechaPago', 'desc')
+                    ->whereHas('cliente', function ($query) {
+                        $query->whereNull('deleted_at');
+                    })
+                    ->paginate(5);
+                break;
+            default:
+                $cuotas = Cuota::orderBy('fechaEmision', 'desc')
+                    ->whereHas('cliente', function ($query) {
+                        $query->whereNull('deleted_at');
+                    })
+                    ->paginate(5);
+                break;
+        }
+        return view('listaCuotas', compact('cuotas', 'tareas'));
     }
-
 
     public function validarCuotaExcepcional()
     {
@@ -36,7 +70,7 @@ class ControllerCuotas extends Controller
 
         session()->flash('message', 'La cuota ha sido creada correctamente.');
 
-        return redirect()->route('listaCuotas');
+        return redirect()->route('listaCuotas', 'fechaEmision');
     }
 
     public function confirmacionBorrar(Cuota $cuota)
@@ -48,7 +82,7 @@ class ControllerCuotas extends Controller
     {
         $cuota->delete();
         session()->flash('message', 'La cuota se ha borrado exitosamente');
-        return redirect()->route('listaCuotas');
+        return redirect()->route('listaCuotas', 'fechaEmision');
     }
 
     public function editarCuota(Cuota $cuota)
@@ -71,6 +105,6 @@ class ControllerCuotas extends Controller
 
         Cuota::where('id', $cuota->id)->update($validacion);
         session()->flash('message', 'Cuota modificado con éxito');
-        return redirect()->route('listaCuotas');
+        return redirect()->route('listaCuotas', 'fechaEmision');
     }
 }

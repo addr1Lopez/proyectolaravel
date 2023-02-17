@@ -48,7 +48,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Borrar</button>
-                <a class="btn btn-secondary" href="{{ route('listaCuotas') }}"><i class="bi bi-backspace"></i> Volver atrás</a>
+                <a class="btn btn-secondary" href="{{ route('listaCuotas','fechaEmision') }}"><i class="bi bi-backspace"></i> Volver atrás</a>
             </form>
         </div>
     </div>
