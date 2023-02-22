@@ -22,12 +22,12 @@ class SessionController extends Controller
             $time = date("H:i:s", strtotime($time . "+1 hour"));
 
             if ($empleado->tipo === 0) {
-                 session(['administrador' => $time]);
-                return redirect()->route('listaTareas');
+                session(['administrador' => $time]);
+                return redirect()->route('listaEmpleados');
             } else {
                 session(['operario' => $empleado->role]);
                 session(['hora_login' => $time]);
-                return redirect()->route('listarTareasOperario'); //poner listaTareasOperarios
+                return redirect()->route('listarTareasOperario');
             }
         }
 

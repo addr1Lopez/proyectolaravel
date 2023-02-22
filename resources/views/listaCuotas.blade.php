@@ -57,7 +57,7 @@
                             <td>{{ $cuota->cliente->cif }}</td>
                             <td>{{ $cuota->concepto }}</td>
                             <td>{{ $cuota->fechaEmision }}</td>
-                            <td>{{ $cuota->importe }}</td>
+                            <td>{{ $cuota->importe}} {{ $cuota->cliente->moneda}}</td>
                             <td>{{ $cuota->fechaPago }}</td>
                             <td>{{ $cuota->notas }}</td>
                             <td>{{ $cuota->pagada }}</td>
@@ -67,6 +67,7 @@
                                         class="bi bi-trash3-fill"></i></a>
                                 <a class="btn btn-success" href="{{ route('generarfactura', $cuota->id) }}"><i
                                         class="bi bi-filetype-pdf"></i></a>
+                                {{-- <a class="btn btn-primary" href="{{ route('facturaCorreo', $cuota->id) }}"><i class="bi bi-send-plus"></i></a> --}}
                             </td>
                         </tr>
                     @endif

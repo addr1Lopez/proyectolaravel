@@ -21,13 +21,13 @@
                 value="{{ old('nombre') ?? $empleado->nombre }}">
             {!! $errors->first('nombre', '<span style="color: red;">:message</span>') !!}
         </div>
-        <br>
+        {{-- <br>
         <div class="col-md-3">
             <label for="clave">Contraseña:</label>
             <input type="text" class="form-control" id="password" name="password"
                 value="{{ old('password') ?? $empleado->password }}">
             {!! $errors->first('password', '<span style="color: red;">:message</span>') !!}
-        </div>
+        </div> --}}
         <br>
         <div class="col-md-3">
             <label for="descripcion">Email:</label>

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Mail\Message;
 
 use App\Models\Empleado;
+use App\Models\Cuota;
+use PDF;
 
 class EmailController extends Controller
 {
@@ -18,7 +20,7 @@ class EmailController extends Controller
         $body = 'Esto es un correo de recuperación de contraseña. 
         ¡IMPORTANTE! Cambie la contraseña nada más iniciar sesión
         Aquí te enviamos la nueva contraseña: ' . $pass;
-        
+
         Mail::raw($body, function (Message $message) use ($to, $subject) {
             $message->to($to)
                 ->subject($subject);
@@ -75,5 +77,25 @@ class EmailController extends Controller
             $password .= $char;
         }
         return $password;
+    }
+
+    public function facturaCorreo(Cuota $cuota)
+    {
+        $to = 'adriansecundariopruebas@gmail.com';
+        $subject = 'Factura cuota';
+        $body = 'Aquí se le adjunta la factura correspondiente a su cuota';
+
+        $pdf = PDF::loadView('factura', compact('cuota'));
+        $pdf_contenido = $pdf->output();
+
+        Mail::raw($body, function (Message $message) use ($to, $subject, $cuota, $pdf_contenido) {
+            $message->to($to)
+                ->subject($subject)
+                ->attachData($pdf_contenido, 'factura_cuota_' . $cuota->id . '.pdf', [
+                    'mime' => 'application/pdf',
+                ]);
+        });
+        session()->flash('message', 'La factura se envió por correo exitosamente.');
+        return redirect()->route('listaCuotas'); 
     }
 }

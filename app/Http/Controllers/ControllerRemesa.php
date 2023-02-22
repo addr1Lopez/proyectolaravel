@@ -31,6 +31,6 @@ class ControllerRemesa extends Controller
         }
 
         session()->flash('message', 'La cuota ha sido creada correctamente.');
-        return redirect()->route('listaCuotas');
+        return redirect()->route('listaCuotas', 'fechaEmision');
     }
 }

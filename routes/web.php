@@ -43,11 +43,10 @@ Route::post('logout', [SessionController::class, 'logout'])->name('logout');
 //     Mail::to('hola@example.com')->send(new TevacaeMail());
 // })->name('email');
 
+//Route::get('/email', [EmailController::class, 'store'])->name('email');
 
 // Descargar factura
 Route::get('/generarfactura/{cuota}', FacturaController::class)->name('generarfactura');
-
-Route::get('/email', [EmailController::class, 'store'])->name('email');
 
 // Insertar tarea como cliente
 Route::get('/formularioTareaClientes', [ControllerTarea::class, 'formularioTareaClientes'])->name('formularioTareaClientes');
@@ -98,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/borrarCliente/{cliente}', [ControllerCliente::class, 'borrarCliente'])->name('borrarCliente');
 
 
-        // MANTENIMIENTO --------------------------------------------------------------------------------------------------------------------
+        // Cuotas --------------------------------------------------------------------------------------------------------------------
 
         // Insertar
         Route::get('/formMantenimiento', ControllerCuotas::class, 'formMantenimiento')->name('formMantenimiento');
@@ -120,6 +119,9 @@ Route::middleware(['auth'])->group(function () {
         // Modificar
         Route::get('/editarCuota/{cuota}', [ControllerCuotas::class, 'editarCuota'])->name('editarCuota');
         Route::put('/editarCuota/{cuota}', [ControllerCuotas::class, 'actualizarCuota'])->name('actualizarCuota');
+
+        // Enviar factura de cuota por correo
+        Route::get('/facturaCorreo/{cuota}', [EmailController::class, 'facturaCorreo'])->name('facturaCorreo');
 
         // TAREA --------------------------------------------------------------------------------------------------------------------
 

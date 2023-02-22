@@ -28,7 +28,7 @@
 
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Enviar</button>
-            <a class="btn btn-danger" href="{{ route('listaCuotas') }}"><i class="bi bi-backspace"></i> Volver a cuotas</a>
+            <a class="btn btn-danger" href="{{ route('listaCuotas', 'fechaEmision') }}"><i class="bi bi-backspace"></i> Volver a cuotas</a>
         </div>
 
     </form>
