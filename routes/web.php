@@ -11,6 +11,8 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\GitHubController;
+use App\Http\Controllers\PaymentController;
+
 
 
 /*
@@ -60,6 +62,10 @@ Route::post('formularioTareaClientes', [ControllerTarea::class, 'validacionClien
 // Recuperacion de contraseña
 Route::get('/formularioPass', [EmailController::class, 'formularioPass'])->name('formularioPass');
 Route::post('formularioPass', [EmailController::class, 'validacionCorreo']);
+
+// Pagar con paypal
+Route::get('/paypal/pagar', [PaymentController::class, 'pagarConPaypal'])->name('formularioPaypal');
+Route::get('/paypal/status', [PaymentController::class, 'paypalStatus'])->name('paypalStatus');
 
 // Te obliga a estar logueado para hacer estas funciones
 Route::middleware(['auth'])->group(function () {
