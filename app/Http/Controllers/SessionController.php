@@ -20,13 +20,13 @@ class SessionController extends Controller
             $empleado = Empleado::where('email', $request->email)->first();
             $time = date("H:i:s");
             $time = date("H:i:s", strtotime($time . "+1 hour"));
+            session(['hora_login' => $time]);
 
             if ($empleado->tipo === 0) {
                 session(['administrador' => $time]);
                 return redirect()->route('listaEmpleados');
             } else {
                 session(['operario' => $empleado->role]);
-                session(['hora_login' => $time]);
                 return redirect()->route('listarTareasOperario');
             }
         }

@@ -54,7 +54,7 @@
                             @endif
                         </td>
                         <td>{{ $tarea->estado }}</td>
-                        <td>{{ $tarea->fechaRealizacion }}</td>
+                        <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
                     </tr>
                 </tbody>
             </table>

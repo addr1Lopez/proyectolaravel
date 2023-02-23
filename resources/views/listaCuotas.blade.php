@@ -56,9 +56,9 @@
                             <td>{{ $cuota->id }}</td>
                             <td>{{ $cuota->cliente->cif }}</td>
                             <td>{{ $cuota->concepto }}</td>
-                            <td>{{ $cuota->fechaEmision }}</td>
+                            <td>{{ date('d-m-Y', strtotime($cuota->fechaEmision)) }}</td>
                             <td>{{ $cuota->importe}} {{ $cuota->cliente->moneda}}</td>
-                            <td>{{ $cuota->fechaPago }}</td>
+                            <td>{{ !empty($cuota->fechaPago) ? date('d-m-Y', strtotime($cuota->fechaPago)) : ' ' }}</td>
                             <td>{{ $cuota->notas }}</td>
                             <td>{{ $cuota->pagada }}</td>
                             <td><a class="btn btn-warning" href="{{ route('editarCuota', $cuota) }}"><i

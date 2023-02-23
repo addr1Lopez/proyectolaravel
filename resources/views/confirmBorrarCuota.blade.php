@@ -32,9 +32,9 @@
                             @endif
                         </td>
                         <td>{{ $cuota->concepto }}</td>
-                        <td>{{ $cuota->fechaEmision }}</td>
+                        <td>{{ date('d-m-Y', strtotime($cuota->fechaEmision)) }}</td>
                         <td>{{ $cuota->importe }}</td>
-                        <td>{{ $cuota->fechaPago }}</td>
+                        <td>{{ !empty($cuota->fechaPago) ? date('d-m-Y', strtotime($cuota->fechaPago)) : ' ' }}</td>
                         <td>{{ $cuota->notas }}</td>
                         <td>{{ $cuota->pagada }}</td>
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\ControllerRemesa;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\GitHubController;
 
 
 /*
@@ -34,6 +35,10 @@ Route::get('/', function () {
 
 // Iniciar sesion
 Route::post('/', [SessionController::class, 'login'])->name('login');
+
+//Inicio de sesion con Github
+Route::get('/github', [GitHubController::class, 'redirectToProvider'])->name('github');
+Route::get('/githubcallback', [GitHubController::class, 'handleProviderCallback'])->name('githubcallback');
 
 // Cerrar sesion
 Route::post('logout', [SessionController::class, 'logout'])->name('logout');

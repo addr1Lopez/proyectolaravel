@@ -31,7 +31,7 @@
                         <td>{{ $empleado->correo }}</td>
                         <td>{{ $empleado->telefono }}</td>
                         <td>{{ $empleado->direccion }}</td>
-                        <td>{{ $empleado->fechaAlta }}</td>
+                        <td>{{ date('d-m-Y', strtotime($empleado->fechaAlta)) }}</td>
                         <td>{{ $empleado->tipo }}</td>
                     </tr>
                 </tbody>

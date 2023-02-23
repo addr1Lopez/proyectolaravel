@@ -16,7 +16,8 @@ class ControllerTarea extends Controller
     public function formularioInsertar(Request $request)
     {
         $clientes = Cliente::all();
-        $empleados = Empleado::all();
+        // $empleados = Empleado::all();
+        $empleados = Empleado::whereNotNull('nif')->get();
         $provincias = Provincia::all();
         return view('formularioTarea', compact('empleados', 'clientes', 'provincias'));
     }
@@ -25,7 +26,7 @@ class ControllerTarea extends Controller
     {
         $clientes = Cliente::all();
         $empleados = Empleado::all(); {
-        $tareas = Tarea::whereHas('cliente', function ($query) {
+            $tareas = Tarea::whereHas('cliente', function ($query) {
                 $query->whereNull('clientes.deleted_at');
             })
                 ->orderBy('fechaRealizacion', 'desc')

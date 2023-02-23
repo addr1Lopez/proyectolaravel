@@ -59,25 +59,41 @@ class EmailController extends Controller
         return redirect()->route('formularioPass');
     }
 
+    // public function generarPass()
+    // {
+    //     $password = '';
+    //     $length = 8;
+
+    //     // Generar la contraseña aleatoria
+    //     $upper = false;
+    //     $number = false;
+    //     while (strlen($password) < $length || !$upper || !$number) {
+    //         $char = chr(random_int(33, 126));
+    //         if (ctype_upper($char)) {
+    //             $upper = true;
+    //         } elseif (ctype_digit($char)) {
+    //             $number = true;
+    //         }
+    //         $password .= $char;
+    //     }
+    //     return $password;
+    // }
+
     public function generarPass()
     {
         $password = '';
-        $length = 8;
+        $length = 4;
 
         // Generar la contraseña aleatoria
-        $upper = false;
-        $number = false;
-        while (strlen($password) < $length || !$upper || !$number) {
-            $char = chr(random_int(33, 126));
-            if (ctype_upper($char)) {
-                $upper = true;
-            } elseif (ctype_digit($char)) {
-                $number = true;
-            }
+        while (strlen($password) < $length) {
+            $char = random_int(0, 9);
             $password .= $char;
         }
+
         return $password;
     }
+
+
 
     public function facturaCorreo(Cuota $cuota)
     {
@@ -96,6 +112,6 @@ class EmailController extends Controller
                 ]);
         });
         session()->flash('message', 'La factura se envió por correo exitosamente.');
-        return redirect()->route('listaCuotas'); 
+        return redirect()->route('listaCuotas');
     }
 }

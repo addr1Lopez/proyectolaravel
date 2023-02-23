@@ -57,7 +57,7 @@
                             @endif
                         </td>
                         <td>{{ $tarea->estado }}</td>
-                        <td>{{ $tarea->fechaRealizacion }}</td>
+                        <td>{{ date('d-m-Y', strtotime($tarea->fechaRealizacion)) }}</td>
                         <td>
                             @if (Auth::check() && Auth::user()->tipo === 1)
                                 <a class="btn btn-primary" href="{{ route('verDetallesOperario', $tarea) }}"><i
