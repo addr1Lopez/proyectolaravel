@@ -9,6 +9,7 @@ use Illuminate\Mail\Message;
 
 use App\Models\Empleado;
 use App\Models\Cuota;
+use App\Models\Cliente;
 use PDF;
 
 class EmailController extends Controller
@@ -94,24 +95,64 @@ class EmailController extends Controller
     }
 
 
-
     public function facturaCorreo(Cuota $cuota)
     {
         $to = 'adriansecundariopruebas@gmail.com';
         $subject = 'Factura cuota';
         $body = 'Aquí se le adjunta la factura correspondiente a su cuota';
 
-        $pdf = PDF::loadView('factura', compact('cuota'));
+        $cliente = Cliente::where('id', $cuota['clientes_id'])->first();
+
+        $tipo_cambio = "";
+
+        if ($cliente['moneda'] != "EUR") {
+            $tipo_cambio = $this->obtenerTipoDeCambio($cliente, $cuota);
+        }
+
+        $pdf = PDF::loadView('factura', compact('cuota','cliente', 'tipo_cambio'));
         $pdf_contenido = $pdf->output();
 
         Mail::raw($body, function (Message $message) use ($to, $subject, $cuota, $pdf_contenido) {
             $message->to($to)
                 ->subject($subject)
-                ->attachData($pdf_contenido, 'factura_cuota_' . $cuota->id . '.pdf', [
+                ->attachData($pdf_contenido, 'Factura Cuota ' . $cuota->id . ' ' . $cuota->concepto . '.pdf', [
                     'mime' => 'application/pdf',
                 ]);
         });
         session()->flash('message', 'La factura se envió por correo exitosamente.');
-        return redirect()->route('listaCuotas');
+        return redirect()->route('listaCuotas','fechaEmision');
+    }
+
+    public function obtenerTipoDeCambio($cliente, $cuota)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.apilayer.com/fixer/convert?to=EUR&from=" . $cliente['moneda'] . "&amount=" . $cuota['importe'] . "",
+            CURLOPT_HTTPHEADER => [
+                "Content-Type: text/plain",
+                "apikey: s1njLPIb5nyl5nn8DjGZ3gPFwrNFNIi9"
+            ],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET"
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $response = json_decode($response, true);
+        //dd($response);
+
+        return [
+            'importe_api' => $response["result"],
+            'fecha_conversion' => $response["date"],
+            'rate' => $response["info"]["rate"]
+        ];
     }
 }

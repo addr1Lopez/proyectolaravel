@@ -14,7 +14,7 @@
             color: #333;
             line-height: 1.4;
         }
-        
+
         .container {
             width: 90%;
             max-width: 800px;
@@ -24,29 +24,29 @@
             border: 1px solid #ddd;
             box-shadow: 0 0 10px #ddd;
         }
-        
+
         h1 {
             font-size: 24px;
             text-align: center;
             margin-bottom: 20px;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-        
+
         th,
         td {
             padding: 10px;
             border: 1px solid #ddd;
         }
-        
+
         th {
             background-color: #f7f7f7;
         }
-        
+
         .text-right {
             text-align: right;
         }
@@ -75,15 +75,21 @@
             </tr>
             <tr>
                 <th>Importe:</th>
-                <td>{{ $cuota->importe }}€</td>
+                <td>{{ $cuota->importe }} {{ $cliente->moneda }}</td>
             </tr>
-            <tr>
-                <th>Pagada:</th>
-                <td>{{ $cuota->pagada }}</td>
-            </tr>
+            @if ($tipo_cambio != '')
+                <tr>
+                    <th>Fecha de conversion:</th>
+                    <td>{{ $tipo_cambio['fecha_conversion'] }}</td>
+                </tr>
+                <tr>
+                    <th>Importe moneda local:</th>
+                    <td> {{ $tipo_cambio['importe_api'] }} €</td>
+                </tr>
+            @endif
             <tr>
                 <th>Fecha Pago:</th>
-                <td>{{ date('d-m-Y', strtotime($cuota->fechaPago)) }}</td>
+                <td>{{ !empty($cuota->fechaPago) ? date('d-m-Y', strtotime($cuota->fechaPago)) : ' ' }}</td>
             </tr>
             <tr>
                 <th>Notas:</th>
@@ -94,4 +100,3 @@
 </body>
 
 </html>
-

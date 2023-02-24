@@ -16,8 +16,6 @@ use PayPal\Api\PaymentExecution;
 
 use PayPal\Exception\PayPalConnectionException;
 
-
-
 class PaymentController extends Controller
 {
     private $apiContext;
@@ -33,7 +31,6 @@ class PaymentController extends Controller
             )
         );
     }
-
 
     public function pagarConPaypal()
     {
@@ -80,8 +77,8 @@ class PaymentController extends Controller
         $token = $request->input('token');
 
         if (!$paymentId || !$payerId || !$token) {
-            $status = 'No se pudo proceder con el pago a través de PayPal.'; //Cambiar el redirect y poner el session message verde de exito
-            return redirect()->route('listaCuotas', 'fechaEmision')->with(compact('status'));
+            session()->flash('error', 'No se pudo proceder con el pago a través de PayPal.');
+            return redirect()->route('listaCuotas', 'fechaEmision');
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -90,16 +87,15 @@ class PaymentController extends Controller
         $execution->setPayerId($payerId);
 
         $result = $payment->execute($execution, $this->apiContext);
-        
-        dd($result);
+
+        //dd($result);
 
         if ($result->getState() === 'approved') {
-            $status = 'Gracias! El pago a través de PayPal se ha realizado correctamente.'; 
-            //Cambiar el redirect y poner el session message verde de exito
-            return redirect()->route('listaCuotas', 'fechaEmision')->with(compact('status'));
+            session()->flash('message', 'Gracias! El pago a través de PayPal se ha realizado correctamente.');
+            return redirect()->route('listaCuotas', 'fechaEmision');
         }
 
-        $status = 'Lo sentimos! El pago a través de PayPal no se pudo realizar.'; //Cambiar el redirect y poner el session error rojo de exito
-        return redirect()->route('listaCuotas', 'fechaEmision')->with(compact('status'));
+        session()->flash('error', 'Lo sentimos! El pago a través de PayPal no se pudo realizar.');
+        return redirect()->route('listaCuotas', 'fechaEmision');
     }
 }

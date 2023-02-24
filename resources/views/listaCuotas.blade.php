@@ -20,6 +20,11 @@
             {{ session()->get('message') }}
         </div>
     @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
     <h1>Lista de cuotas</h1>
     <hr>
     <br>
@@ -67,9 +72,9 @@
                                         class="bi bi-trash3-fill"></i></a>
                                 <a class="btn btn-success" href="{{ route('generarfactura', $cuota->id) }}"><i
                                         class="bi bi-filetype-pdf"></i></a>
-                                <a class="btn btn-primary" href="{{ route('formularioPaypal') }}">Pagar con Paypal</a>
-
-                                {{-- <a class="btn btn-primary" href="{{ route('facturaCorreo', $cuota->id) }}"><i class="bi bi-send-plus"></i></a> --}}
+                                <a class="btn btn-primary" href="{{ route('formularioPaypal') }}"><i
+                                    class="bi bi-paypal"></i></a>
+                                <a class="btn btn-dark" href="{{ route('facturaCorreo', $cuota->id) }}"><i class="bi bi-send-plus"></i></a>
                             </td>
                         </tr>
                     @endif
