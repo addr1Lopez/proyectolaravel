@@ -111,8 +111,8 @@ Route::middleware(['auth'])->group(function () {
         // Cuotas --------------------------------------------------------------------------------------------------------------------
 
         // Insertar
-        Route::get('/formMantenimiento', ControllerCuotas::class, 'formMantenimiento')->name('formMantenimiento');
-        Route::post('formMantenimiento', [ControllerCuotas::class, 'validarCuotaExcepcional']);
+        // Route::get('/formMantenimiento', ControllerCuotas::class, 'formMantenimiento')->name('formMantenimiento');
+        // Route::post('formMantenimiento', [ControllerCuotas::class, 'validarCuotaExcepcional']);
 
         Route::get('/formularioRemesa', ControllerRemesa::class, 'formularioRemesa')->name('formularioRemesa');
         Route::post('formularioRemesa', [ControllerRemesa::class, 'validacionInsertarRemesa']);
